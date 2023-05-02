@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
-
-// Глобальные переменные куки и user id для пользователя задаются тут
-String? cookieValue;
-int? userid;
+import 'package:mobile_app_diplom/services/sign_up.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key, required this.toggleView}) : super(key: key);
@@ -20,9 +17,11 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
+  final _formKey = GlobalKey<FormState>();
+
   // Вводимые при регистрации поля
-  String username = '';
   String email = '';
+  String username = '';
   String password = '';
 
   @override
@@ -32,6 +31,7 @@ class _SignUpState extends State<SignUp> {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,28 +47,7 @@ class _SignUpState extends State<SignUp> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10.0,),
-              TextField(
-                onChanged: (value) {
-                  setState(() {
-                    username = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: 'Name',
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-              ),
-              SizedBox(height: 10.0,),
-              TextField(
+              TextFormField(
                 onChanged: (value) {
                   setState(() {
                     email = value;
@@ -87,9 +66,32 @@ class _SignUpState extends State<SignUp> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
+                validator: (val) => val!.isEmpty ? 'Enter email': null,
               ),
               SizedBox(height: 10.0,),
-              TextField(
+              TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    username = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: 'Name',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                ),
+                validator: (val) => val!.isEmpty ? 'Enter name': null,
+              ),
+              SizedBox(height: 10.0,),
+              TextFormField(
                 onChanged: (value) {
                   setState(() {
                     password = value;
@@ -108,13 +110,18 @@ class _SignUpState extends State<SignUp> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
+                validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long': null,
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
                 onPressed: () async {
-                  print(username);
-                  print(email);
-                  print(password);
+                  if(_formKey.currentState!.validate()){
+                    print(username);
+                    print(email);
+                    print(password);
+                    final signInService = SingUpService();
+                    await signInService.signIn(email, username, password);
+                  };
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[700]

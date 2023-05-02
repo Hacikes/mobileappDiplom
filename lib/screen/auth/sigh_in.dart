@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:mobile_app_diplom/services/sign_in.dart';
 
-// Глобальные переменные куки и user id для пользователя задаются тут
-String? cookieValue;
-int? userid;
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key, required this.toggleView}) : super(key: key);
@@ -20,63 +18,12 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
+  final _formKey = GlobalKey<FormState>();
+
+
   // Получаемые при логине поля
-  String email = '';
+  String username = '';
   String password = '';
-
-  Future<void> signIn() async {
-    final url = Uri.parse('http://80.90.179.158:9999/auth/login');
-    final headers = {
-      'accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'};
-    final body = {'username': 'string', 'password': 'string'};
-    final response = await http.post(url, headers: headers, body: body);
-
-    if (response.statusCode == 200) {
-      // Обработка успешного ответа
-      print('Успешный ответ: ${response.headers}');
-      print('Успешный ответ: ${response.body}');
-
-      // Поиск и сохранение Cookie в переменную cookieValue
-      final setCookieHeader = response.headers['set-cookie'];
-      final regex = RegExp(r'bonds=.{157}');
-      final match = regex.firstMatch(setCookieHeader!);
-      cookieValue = match?.group(0);
-      //print(cookieValue);
-    } else {
-      // Обработка ошибки
-      print('Ошибка: ${response.statusCode}');
-    }
-  }
-
-  // Получение user_id
-  Future<void> getUserId() async {
-    final url = Uri.parse('http://80.90.179.158:9999/user/me');
-    final headers = {
-      'Accept-Encoding': 'gzip, deflate, br',
-      'Cookie': '$cookieValue'};
-    final response = await http.get(url, headers: headers);
-    if (response.statusCode == 200) {
-      // Обработка успешного ответа
-      print('Успешный ответ: ${response.headers}');
-      print('Успешный ответ: ${response.body}');
-
-      // Получение из ответа user_id и запись его в глобальную переменную userid
-      Map data = jsonDecode(response.body);
-      userid = data['id'];
-      //print(userid);
-    } else {
-      // Обработка ошибки
-      print('Ошибка: ${response.statusCode}');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    signIn().then((value) => getUserId());
-    //getUserId();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +32,7 @@ class _SignInState extends State<SignIn> {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -100,10 +48,10 @@ class _SignInState extends State<SignIn> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20.0,),
-              TextField(
+              TextFormField(
                 onChanged: (value) {
                   setState(() {
-                    email = value;
+                    username = value;
                   });
                 },
                 decoration: InputDecoration(
@@ -115,13 +63,14 @@ class _SignInState extends State<SignIn> {
                     borderSide: BorderSide(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Email',
+                  hintText: 'Username',
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
+                validator: (val) => val!.isEmpty ? 'Enter username': null,
               ),
               SizedBox(height: 10.0,),
-              TextField(
+              TextFormField(
                 onChanged: (value) {
                   setState(() {
                     password = value;
@@ -140,12 +89,18 @@ class _SignInState extends State<SignIn> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
+                validator: (val) => val!.isEmpty ? 'Enter password': null,
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
                 onPressed: () async {
-                  print(email);
-                  print(password);
+                  if(_formKey.currentState!.validate()){
+                    // print(username);
+                    // print(password);
+                    final signInService = SingInService();
+                    await signInService.signIn(username, password);
+                    await signInService.getUserId();
+                  };
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[700]

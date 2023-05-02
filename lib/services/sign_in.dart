@@ -7,21 +7,14 @@ import 'package:cookie_jar/cookie_jar.dart';
 String? cookieValue;
 int? userid;
 
-class SignInService extends StatefulWidget {
-  const SignInService({Key? key}) : super(key: key);
+class SingInService {
 
-  @override
-  State<SignInService> createState() => _SignInServiceState();
-}
-
-class _SignInServiceState extends State<SignInService> {
-
-  Future<void> signIn() async {
+  Future<void> signIn(String username, String password) async {
     final url = Uri.parse('http://80.90.179.158:9999/auth/login');
     final headers = {
       'accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded'};
-    final body = {'username': 'string', 'password': 'string'};
+    final body = {'username': username, 'password': password};
     final response = await http.post(url, headers: headers, body: body);
 
     if (response.statusCode == 200) {
@@ -31,7 +24,7 @@ class _SignInServiceState extends State<SignInService> {
 
       // Поиск и сохранение Cookie в переменную cookieValue
       final setCookieHeader = response.headers['set-cookie'];
-      final regex = RegExp(r'bonds=.{157}');
+      final regex = RegExp(r'(bonds=[^;,\s]+)');
       final match = regex.firstMatch(setCookieHeader!);
       cookieValue = match?.group(0);
       //print(cookieValue);
@@ -61,17 +54,5 @@ class _SignInServiceState extends State<SignInService> {
       // Обработка ошибки
       print('Ошибка: ${response.statusCode}');
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    signIn().then((value) => getUserId());
-    //getUserId();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
