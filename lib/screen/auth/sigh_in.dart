@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:cookie_jar/cookie_jar.dart';
+import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
 import 'package:mobile_app_diplom/services/sign_in.dart';
+
+import 'package:mobile_app_diplom/screen/auth/forgot_password.dart';
+import '../home/home.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -22,7 +22,7 @@ class _SignInState extends State<SignIn> {
 
 
   // Получаемые при логине поля
-  String username = '';
+  String email = '';
   String password = '';
 
   @override
@@ -51,7 +51,7 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 onChanged: (value) {
                   setState(() {
-                    username = value;
+                    email = value;
                   });
                 },
                 decoration: InputDecoration(
@@ -63,11 +63,11 @@ class _SignInState extends State<SignIn> {
                     borderSide: BorderSide(color: Colors.blue),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Username',
+                  hintText: 'Email',
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
-                validator: (val) => val!.isEmpty ? 'Enter username': null,
+                validator: (val) => val!.isEmpty ? 'Enter email': null,
               ),
               SizedBox(height: 10.0,),
               TextFormField(
@@ -95,10 +95,38 @@ class _SignInState extends State<SignIn> {
               ElevatedButton(
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){
-                    // print(username);
+                    // print(email);
                     // print(password);
                     final signInService = SingInService();
-                    await signInService.signIn(username, password);
+                    final statusCode =
+                    await signInService.signIn(email, password);
+                    switch (statusCode) {
+                      case 200:
+                      // Логин прошел успешно, переходим на экран Home
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                        );
+                        break;
+                      case 400:
+                      // Ошибка 400, выводим сообщение об ошибке
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Неверный логин или пароль'),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                        break;
+                      default:
+                      // Обработка других статусов ответа
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Упс... Что-то пошло не так ...'),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                        break;
+                    }
                     await signInService.getUserId();
                   };
                 },
@@ -113,6 +141,10 @@ class _SignInState extends State<SignIn> {
               TextButton(
                 onPressed: () {
                   // Действие при нажатии на кнопку
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ForgotPassword(toggleView: widget.toggleView,)),
+                  );
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -128,7 +160,10 @@ class _SignInState extends State<SignIn> {
               TextButton(
                 onPressed: () async {
                   // Действие при нажатии на кнопку
-                  widget.toggleView();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUp(toggleView: widget.toggleView,)),
+                  );
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

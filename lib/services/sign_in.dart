@@ -6,10 +6,16 @@ import 'package:cookie_jar/cookie_jar.dart';
 // Глобальные переменные куки и user id для пользователя задаются тут
 String? cookieValue;
 int? userid;
+String? useremail;
+bool? useris_active;
+bool? useris_superuser;
+bool? useris_verified;
+String? userusername;
+int? userrole_id;
 
 class SingInService {
 
-  Future<void> signIn(String username, String password) async {
+  Future<int> signIn(String username, String password) async {
     final url = Uri.parse('http://80.90.179.158:9999/auth/login');
     final headers = {
       'accept': 'application/json',
@@ -32,10 +38,11 @@ class SingInService {
       // Обработка ошибки
       print('Ошибка: ${response.statusCode}');
     }
+    return response.statusCode;
   }
 
 // Получение user_id
-  Future<void> getUserId() async {
+  Future<int?> getUserId() async {
     final url = Uri.parse('http://80.90.179.158:9999/user/me');
     final headers = {
       'Accept-Encoding': 'gzip, deflate, br',
@@ -46,13 +53,20 @@ class SingInService {
       print('Успешный ответ: ${response.headers}');
       print('Успешный ответ: ${response.body}');
 
-      // Получение из ответа user_id и запись его в глобальную переменную userid
+      // Получение из ответа user_id и запись его в глобальную переменную userid и не только их
       Map data = jsonDecode(response.body);
       userid = data['id'];
+      useremail = data['email'];
+      useris_active = data['is_active'];
+      useris_superuser = data['is_superuser'];
+      useris_verified = data['is_verified'];
+      userrole_id = data['role_id'];
+      userusername = data['username'];
       //print(userid);
     } else {
       // Обработка ошибки
       print('Ошибка: ${response.statusCode}');
     }
+    return userid;
   }
 }

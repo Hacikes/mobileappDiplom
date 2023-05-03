@@ -1,29 +1,26 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
-import 'package:mobile_app_diplom/services/sign_up.dart';
+import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key, required this.toggleView}) : super(key: key);
+import '../../services/sign_in.dart';
+
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({Key? key, required this.toggleView}) : super(key: key);
 
   final Function toggleView;
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _ForgotPasswordState extends State<ForgotPassword> {
 
   final _formKey = GlobalKey<FormState>();
 
-  // Вводимые при регистрации поля
+  // Получаемые при логине поля
   String email = '';
-  String username = '';
   String password = '';
+  String repeatPassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,7 @@ class _SignUpState extends State<SignUp> {
             children: <Widget>[
               // SizedBox(height: 200.0,),
               Text(
-                'Register',
+                'Password recovery',
                 style: TextStyle(
                   fontSize: 36.0,
                   color: Colors.white,
@@ -47,7 +44,7 @@ class _SignUpState extends State<SignUp> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10.0,),
+              SizedBox(height: 20.0,),
               TextFormField(
                 onChanged: (value) {
                   setState(() {
@@ -67,43 +64,7 @@ class _SignUpState extends State<SignUp> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Enter email';
-                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
-                    return 'Enter valid email';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 10.0,),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    username = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: 'Name',
-                  filled: true,
-                  fillColor: Colors.grey[200],
-                ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Enter name';
-                  } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
-                    return 'Enter valid name';
-                  }
-                  return null;
-                },
+                validator: (val) => val!.isEmpty ? 'Enter email': null,
               ),
               SizedBox(height: 10.0,),
               TextFormField(
@@ -125,23 +86,45 @@ class _SignUpState extends State<SignUp> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
-                validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long': null,
+                validator: (val) => val!.isEmpty ? 'Enter password': null,
+              ),
+              SizedBox(height: 10.0,),
+              TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    repeatPassword = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: 'Repeat password',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                ),
+                validator: (val) => val!.isEmpty ? 'Enter repeat password': null,
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){
-                    print(username);
-                    print(email);
-                    print(password);
-                    final signInService = SingUpService();
-
+                    // print(email);
+                    // print(password);
+                    // print(repeatPassword);
+                    final signInService = SingInService();
+                    //await signInService.getUserId();
                     final statusCode =
-                    await signInService.signIn(email, username, password);
+                    await signInService.signIn(email, password);
                     switch (statusCode) {
-                      case 201:
+                      case 200 :
                       // Логин прошел успешно, переходим на экран Home
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView,)),
                         );
@@ -150,7 +133,7 @@ class _SignUpState extends State<SignUp> {
                       // Ошибка 400, выводим сообщение об ошибке
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Пользователь с таким email уже существует'),
+                            content: Text('Пользователя с указанной почтой не существует'),
                             duration: Duration(seconds: 3),
                           ),
                         );
@@ -165,20 +148,21 @@ class _SignUpState extends State<SignUp> {
                         );
                         break;
                     }
+
                   };
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue[700]
                 ),
                 child: Text(
-                  'Sign Up',
+                  'Recovery password',
                   style: TextStyle(color:Colors.white),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   // Действие при нажатии на кнопку
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView,)),
                   );
@@ -187,7 +171,7 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Login',
+                  'Sign In',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14.0,
@@ -201,6 +185,3 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
-
-
-

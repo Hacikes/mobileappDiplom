@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:cookie_jar/cookie_jar.dart';
+
 
 class SingUpService {
 
-  Future<void> signIn(String email, String username, String password) async {
+  Future<int> signIn(String email, String username, String password) async {
     final url = Uri.parse('http://80.90.179.158:9999/auth/register');
     final headers = {
       'accept': 'application/json',
@@ -16,7 +15,7 @@ class SingUpService {
       'username': username,
       'password': password,
       'is_active': true,
-      'is_verified': false,
+      'is_verified': true,
       'role_id': 1,
     });
     final response = await http.post(url, headers: headers, body: body);
@@ -29,5 +28,6 @@ class SingUpService {
       // Обработка ошибки
       print('Ошибка: ${response.statusCode}');
     }
+    return response.statusCode;
   }
 }
