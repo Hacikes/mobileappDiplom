@@ -4,32 +4,26 @@ import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:mobile_app_diplom/services/sign_in.dart';
 
-class ForgotPassword {
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 
-  //final userId = SingInService().getUserId();
-  // print(signInService);
+class RecoveryPassword {
 
-  Future<int> forgotPassword(String password) async {
-    final url = Uri.parse('http://80.90.179.158:9999/user/$userid');
-    final headers = {
-      'accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Cookie': '$cookieValue'};
-    final body = {
-      'email': useremail,
-      'username': userusername,
-      'password': password,
-      'is_active': useris_active,
-      'is_verified': useris_verified,
-      'role_id': userrole_id,
-    };
-    final response = await http.post(url, headers: headers, body: body);
+  Future<int> recoveryPassword(String sender) async {
+    final smtpServer = gmail('volna4753@gmail.com', 'Ilove1613!');
+    final message = Message()
+      ..from = Address(sender, 'Test')
+      ..recipients.add('volna4753@gmail.com')
+      ..subject = "Восстановление пароля"
+      ..text = "Чувак забыл пароль, надо бы его восстановить";
 
-    if (response.statusCode == 200) {
-      // Обработка успешного ответа
-      print('Успешный ответ: ${response.headers}');
-      print('Успешный ответ: ${response.body}');
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Message sent: ' + sendReport.toString());
+      return 200; // Здесь возвращаем статус код ответа
+    } on MailerException catch (e) {
+      print('Message not sent. ${e.toString()}');
+      return 500; // Здесь возвращаем статус код ошибки
     }
-    return response.statusCode;
   }
 }

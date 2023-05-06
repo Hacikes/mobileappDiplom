@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_diplom/screen/home/home.dart';
+import 'package:mobile_app_diplom/screen/home/home_currency.dart';
 import 'package:mobile_app_diplom/screen/auth/authenticate.dart';
 
 class Wrapper extends StatelessWidget {

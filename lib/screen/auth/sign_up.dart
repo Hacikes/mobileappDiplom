@@ -125,6 +125,7 @@ class _SignUpState extends State<SignUp> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
+                obscureText: true,
                 validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long': null,
               ),
               SizedBox(height: 10.0),

@@ -4,7 +4,7 @@ import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
 import 'package:mobile_app_diplom/services/sign_in.dart';
 
 import 'package:mobile_app_diplom/screen/auth/forgot_password.dart';
-import '../home/home.dart';
+import '../home/home_currency.dart';
 
 
 class SignIn extends StatefulWidget {
@@ -67,7 +67,14 @@ class _SignInState extends State<SignIn> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
-                validator: (val) => val!.isEmpty ? 'Enter email': null,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Enter email';
+                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
+                    return 'Enter valid email';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 10.0,),
               TextFormField(
@@ -89,6 +96,7 @@ class _SignInState extends State<SignIn> {
                   filled: true,
                   fillColor: Colors.grey[200],
                 ),
+                obscureText: true,
                 validator: (val) => val!.isEmpty ? 'Enter password': null,
               ),
               SizedBox(height: 10.0),
