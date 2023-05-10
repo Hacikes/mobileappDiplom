@@ -25,8 +25,10 @@ class SingInService {
 
     if (response.statusCode == 200) {
       // Обработка успешного ответа
-      print('Успешный ответ: ${response.headers}');
-      print('Успешный ответ: ${response.body}');
+      // print('Успешный ответ: ${response.headers}');
+      // print('Успешный ответ: ${response.body}');
+      print('Успешный ответ при авторизации: ${response.statusCode}');
+
 
       // Поиск и сохранение Cookie в переменную cookieValue
       final setCookieHeader = response.headers['set-cookie'];
@@ -36,7 +38,7 @@ class SingInService {
       //print(cookieValue);
     } else {
       // Обработка ошибки
-      print('Ошибка: ${response.statusCode}');
+      print('Ошибка при авторизации: ${response.statusCode}');
     }
     return response.statusCode;
   }
@@ -50,8 +52,9 @@ class SingInService {
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
       // Обработка успешного ответа
-      print('Успешный ответ: ${response.headers}');
-      print('Успешный ответ: ${response.body}');
+      // print('Успешный ответ: ${response.headers}');
+      // print('Успешный ответ: ${response.body}');
+      print('Успешный ответ при получении userid: ${response.statusCode}');
 
       // Получение из ответа user_id и запись его в глобальную переменную userid и не только их
       Map data = jsonDecode(response.body);
@@ -65,7 +68,7 @@ class SingInService {
       //print(userid);
     } else {
       // Обработка ошибки
-      print('Ошибка: ${response.statusCode}');
+      print('Ошибка при получении userid: ${response.statusCode}');
     }
     return userid;
   }

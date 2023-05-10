@@ -1,10 +1,31 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/services/get_total_volume_currency_in_RUB.dart';
+import 'package:mobile_app_diplom/services/sign_in.dart';
 
-class home_currency_dashboard extends StatelessWidget {
-  const home_currency_dashboard({
-    super.key,
-  });
+
+class home_currency_dashboard extends StatefulWidget {
+  const home_currency_dashboard({Key? key}) : super(key: key);
+
+  @override
+  State<home_currency_dashboard> createState() => _home_currency_dashboardState();
+}
+
+class _home_currency_dashboardState extends State<home_currency_dashboard> {
+
+  // int? userId = userid;
+  String StartSum = "XXX XXX XXX XXX";
+
+  Future<void> setupTotalVolume() async {
+    TotalVolumeCurrencyInRUB instance = TotalVolumeCurrencyInRUB();
+    await instance.getTotalVolumeCurrencyInRUB();
+    //print(instance.totalSum);
+    setState(() {
+      StartSum = instance.totalSum;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +45,11 @@ class home_currency_dashboard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "XXX XXX XXX XXX X",
+                  StartSum,
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 20.0,
                     color: Colors.white,
-                    fontWeight: FontWeight.normal,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -38,7 +59,15 @@ class home_currency_dashboard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  void initState(){
+    super.initState();
+    setupTotalVolume();
+  }
+
 }
+
 
 List<PieChartSectionData> pieChartSectionDatas = [
   PieChartSectionData(

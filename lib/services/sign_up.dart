@@ -22,11 +22,12 @@ class SingUpService {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       // Обработка успешного ответа
-      print('Успешный ответ: ${response.headers}');
-      print('Успешный ответ: ${response.body}');
+      // print('Успешный ответ: ${response.headers}');
+      // print('Успешный ответ: ${response.body}');
+      print('Успешный ответ при регистрации: ${response.statusCode}');
     } else {
       // Обработка ошибки
-      print('Ошибка: ${response.statusCode}');
+      print('Ошибка при регистрации: ${response.statusCode}');
     }
     return response.statusCode;
   }
