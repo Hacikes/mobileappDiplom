@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
-import 'package:mobile_app_diplom/services/sign_up.dart';
+import 'package:mobile_app_diplom/services/services_for_auth/sign_up.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key, required this.toggleView}) : super(key: key);

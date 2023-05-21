@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:mobile_app_diplom/services/sign_in.dart';
+import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';

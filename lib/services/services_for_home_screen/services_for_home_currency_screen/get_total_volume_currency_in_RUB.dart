@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:mobile_app_diplom/services/sign_in.dart';
+import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 
 class TotalVolumeCurrencyInRUB {
@@ -39,7 +39,7 @@ class TotalVolumeCurrencyInRUB {
       //print(totalSum);
     } else {
       // Обработка ошибки
-      print('Ошибка: ${response.statusCode}');
+      print('Ошибка при получении общего количества денег: ${response.statusCode}');
       // print('Успешный ответ: $url');
     }
     // return totalSum;

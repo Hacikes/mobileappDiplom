@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
-import 'package:mobile_app_diplom/services/sign_in.dart';
+import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 import 'package:mobile_app_diplom/screen/auth/forgot_password.dart';
 import '../home/home_currency.dart';

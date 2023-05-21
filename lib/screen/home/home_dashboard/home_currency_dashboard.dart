@@ -1,7 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_app_diplom/services/get_total_volume_currency_in_RUB.dart';
-import 'package:mobile_app_diplom/services/sign_in.dart';
+import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
+import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_total_volume_currency_in_RUB.dart';
+import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
+
+import '../../../services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
 
 
 class home_currency_dashboard extends StatefulWidget {
@@ -14,7 +17,10 @@ class home_currency_dashboard extends StatefulWidget {
 class _home_currency_dashboardState extends State<home_currency_dashboard> {
 
   // int? userId = userid;
+  //String ShareOfCurrencyInAllInstruments = '';
   String StartSum = "XXX XXX XXX XXX";
+  List<double> StartPie = [];
+  List<PieChartSectionData> pieChartSectionDatas = [];
 
   Future<void> setupTotalVolume() async {
     TotalVolumeCurrencyInRUB instance = TotalVolumeCurrencyInRUB();
@@ -25,7 +31,38 @@ class _home_currency_dashboardState extends State<home_currency_dashboard> {
     });
   }
 
+  Future<void> setupShareOfCurrencyInAllInstruments() async {
+    ShareOfCurrencyInAllInstruments instance = ShareOfCurrencyInAllInstruments();
+    await instance.getShareOfCurrencyInAllInstruments();
+    //print(instance.values);
+    List<Color> colors = [
+      Colors.green,
+      Colors.amber,
+      Colors.blue,
+      Colors.yellow,
+      Colors.red,
+      Colors.deepPurple
+      // Добавьте другие цвета, если необходимо
+    ];
+     setState(() {
+       StartPie = instance.values;
+       pieChartSectionDatas = generatePieChartSectionData(colors);
+     });
+  }
 
+  List<PieChartSectionData> generatePieChartSectionData(List<Color> colors) {
+    List<PieChartSectionData> sectionDataList = [];
+    for (int i = 0; i < StartPie.length; i++) {
+      final sectionData = PieChartSectionData(
+        color: colors[i],
+        value: StartPie[i],
+        showTitle: false,
+        radius: 20,
+      );
+      sectionDataList.add(sectionData);
+    }
+    return sectionDataList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,34 +101,35 @@ class _home_currency_dashboardState extends State<home_currency_dashboard> {
   void initState(){
     super.initState();
     setupTotalVolume();
+    setupShareOfCurrencyInAllInstruments();
   }
 
 }
 
 
-List<PieChartSectionData> pieChartSectionDatas = [
-  PieChartSectionData(
-    color: Colors.blue,
-    value: 15,
-    showTitle: false,
-    radius: 20,
-  ),
-  PieChartSectionData(
-    color: Colors.yellow,
-    value: 25,
-    showTitle: false,
-    radius: 20,
-  ),
-  PieChartSectionData(
-    color: Colors.green,
-    value: 40,
-    showTitle: false,
-    radius: 20,
-  ),
-  PieChartSectionData(
-    color: Colors.red,
-    value: 20,
-    showTitle: false,
-    radius: 20,
-  ),
-];
+// List<PieChartSectionData> pieChartSectionDatas = [
+//   PieChartSectionData(
+//     color: Colors.blue,
+//     value: 15,
+//     showTitle: false,
+//     radius: 20,
+//   ),
+//   PieChartSectionData(
+//     color: Colors.yellow,
+//     value: 25,
+//     showTitle: false,
+//     radius: 20,
+//   ),
+//   PieChartSectionData(
+//     color: Colors.green,
+//     value: 40,
+//     showTitle: false,
+//     radius: 20,
+//   ),
+//   PieChartSectionData(
+//     color: Colors.red,
+//     value: 20,
+//     showTitle: false,
+//     radius: 20,
+//   ),
+// ];

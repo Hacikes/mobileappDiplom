@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
 import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
-import 'package:mobile_app_diplom/services/forgot_password.dart';
-import '../../services/sign_in.dart';
+import 'package:mobile_app_diplom/services/services_for_auth/forgot_password.dart';
+import '../../services/services_for_auth/sign_in.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key, required this.toggleView}) : super(key: key);
