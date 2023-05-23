@@ -5,11 +5,9 @@ import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 
 class ShareOfCurrencyInAllInstruments {
-  List<String> share_of_currency_in_all_instruments = [];
+  //List<String> share_of_currency_in_all_instruments = [];
   List<String> keys = [];
   List<double> values = [];
-
-
 
   ShareOfCurrencyInAllInstruments();
 
@@ -29,23 +27,27 @@ class ShareOfCurrencyInAllInstruments {
     if (response.statusCode == 200) {
       // Обработка успешного ответа
       // print('Успешный ответ: ${response.headers}');
-      //print('Успешный ответ: ${response.body}');
+      // print('Успешный ответ: ${response.body}');
       // print('Успешный ответ: $url');
       print(
           'Успешный ответ при получении доли валюты в интсрументах для пользователя: ${response
               .statusCode}');
 
-
       // Парсим тело ответа
       Map<String, dynamic> decodedJson = jsonDecode(response.body);
-      print(decodedJson);
+      //print(decodedJson);
       List<dynamic> percentCurrencyOnAllInstruments = decodedJson['percent_currency_on_all_instruments'];
-      print(percentCurrencyOnAllInstruments);
+      //print(percentCurrencyOnAllInstruments);
 
       for (Map<String, dynamic> currency in percentCurrencyOnAllInstruments) {
         currency.forEach((key, value) {
           keys.add(key);
-          values.add(value);
+          //values.add(value);
+          if (value is double) {
+            values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
+          } else if (value is int) {
+            values.add(value.toDouble());
+          }
         });
       }
 

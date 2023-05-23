@@ -2,10 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_total_volume_currency_in_RUB.dart';
-import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
-
-import '../../../services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
-
+import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
 
 class home_currency_dashboard extends StatefulWidget {
   const home_currency_dashboard({Key? key}) : super(key: key);
@@ -16,8 +13,7 @@ class home_currency_dashboard extends StatefulWidget {
 
 class _home_currency_dashboardState extends State<home_currency_dashboard> {
 
-  // int? userId = userid;
-  //String ShareOfCurrencyInAllInstruments = '';
+
   String StartSum = "XXX XXX XXX XXX";
   List<double> StartPie = [];
   List<PieChartSectionData> pieChartSectionDatas = [];
@@ -35,18 +31,18 @@ class _home_currency_dashboardState extends State<home_currency_dashboard> {
     ShareOfCurrencyInAllInstruments instance = ShareOfCurrencyInAllInstruments();
     await instance.getShareOfCurrencyInAllInstruments();
     //print(instance.values);
-    List<Color> colors = [
-      Colors.green,
-      Colors.amber,
-      Colors.blue,
-      Colors.yellow,
-      Colors.red,
-      Colors.deepPurple
-      // Добавьте другие цвета, если необходимо
-    ];
+    // List<Color> colors = [
+    //   Colors.green,
+    //   Colors.amber,
+    //   Colors.blue,
+    //   Colors.yellow,
+    //   Colors.red,
+    //   Colors.deepPurple
+    //   // Добавьте другие цвета, если необходимо
+    // ];
      setState(() {
        StartPie = instance.values;
-       pieChartSectionDatas = generatePieChartSectionData(colors);
+       pieChartSectionDatas = generatePieChartSectionData(ColorsForDashboard.getColors());
      });
   }
 
