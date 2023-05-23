@@ -11,9 +11,11 @@ class HomeCurrencyPercents extends StatefulWidget {
 
 class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
 
-  List<String> StartCurrencyName = [];
-  List<double> StartCurrencyPercent = [];
+  List<String> StartCurrencyName = ['XXX'];
+  List<double> StartCurrencyPercent = [0.0];
   List<Container> ContainerPercentsCurrency = [];
+
+
 
   Future<void> setupCurrencyNameAndCurrencyPercent() async {
     ShareOfCurrencyInAllInstruments instance = ShareOfCurrencyInAllInstruments();
@@ -47,12 +49,15 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              StartCurrencyName[i],
-              style: TextStyle(
-                fontSize: 16.0,
-                color: Colors.white,
-                fontWeight: FontWeight.normal,
+            SizedBox(
+              width: 60,
+              child: Text(
+                StartCurrencyName[i],
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                ),
               ),
             ),
             //SizedBox(width: 20,),

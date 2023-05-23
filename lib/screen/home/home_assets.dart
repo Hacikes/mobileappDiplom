@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
-// import 'package:pie_chart/pie_chart.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
-import 'package:mobile_app_diplom/screen/home/home_button/home_button_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_button/home_button_assets.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_currency.dart';
 
 
-class Home extends StatefulWidget {
-  const Home({Key? key, required this.toggleView}) : super(key: key);
+
+class HomeAssets extends StatefulWidget {
+  const HomeAssets({Key? key, required this.toggleView}) : super(key: key);
 
   final Function toggleView;
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeAssets> createState() => _HomeAssetsState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeAssetsState extends State<HomeAssets> {
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +25,20 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.black38,
         appBar: AppBar(
-          title: const Text('Home'),
+          title: Text('Home'),
           backgroundColor: Colors.black54,
           elevation: 0.0,
           automaticallyImplyLeading: false, // Убираем кнопку "Назад"
-          actions: const <Widget>[
+          actions: <Widget>[
           ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 10.0,),
-            const Padding(
-              padding: EdgeInsets.all(12.0),
+            SizedBox(height: 10.0,),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
               child: Text(
                 'General Info',
                 style: TextStyle(
@@ -49,14 +49,14 @@ class _HomeState extends State<Home> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 10.0,),
-            home_button_currency(toggleView: widget.toggleView,),
-            const SizedBox(height: 10,),
-            const home_currency_dashboard(),
+            SizedBox(height: 10.0,),
+            home_button_assets(toggleView: widget.toggleView,),
+            SizedBox(height: 10,),
+            home_currency_dashboard(),
             // SizedBox(height: 0.0,),
-            const HomeCurrencyPercents(),
-            const SizedBox(height: 10,),
-            const button_Get_list(),
+            HomeCurrencyPercents(),
+            SizedBox(height: 10,),
+            button_Get_list(),
           ],
         ),
       ),

@@ -113,7 +113,7 @@ class _SignInState extends State<SignIn> {
                       // Логин прошел успешно, переходим на экран Home
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Home()),
+                          MaterialPageRoute(builder: (context) => Home(toggleView: widget.toggleView,)),
                         );
                         break;
                       case 400:
