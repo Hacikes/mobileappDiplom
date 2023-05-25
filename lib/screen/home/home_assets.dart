@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
-import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
+import 'package:mobile_app_diplom/screen/home/home_dashboard/home_assets_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_assets.dart';
-import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_assets.dart';
 
 
 
@@ -38,7 +38,7 @@ class _HomeAssetsState extends State<HomeAssets> {
           children: <Widget>[
             SizedBox(height: 10.0,),
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: const EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
               child: Text(
                 'General Info',
                 style: TextStyle(
@@ -46,15 +46,15 @@ class _HomeAssetsState extends State<HomeAssets> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
               ),
             ),
             SizedBox(height: 10.0,),
             home_button_assets(toggleView: widget.toggleView,),
             SizedBox(height: 10,),
-            home_currency_dashboard(),
+            home_assets_dashboard(),
             // SizedBox(height: 0.0,),
-            HomeCurrencyPercents(),
+            HomeAssetsPercents(),
             SizedBox(height: 10,),
             button_Get_list(),
           ],

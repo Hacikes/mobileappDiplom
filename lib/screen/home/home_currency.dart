@@ -32,13 +32,13 @@ class _HomeState extends State<Home> {
           actions: const <Widget>[
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        body: ListView(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 10.0,),
             const Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
               child: Text(
                 'General Info',
                 style: TextStyle(
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
               ),
             ),
             const SizedBox(height: 10.0,),

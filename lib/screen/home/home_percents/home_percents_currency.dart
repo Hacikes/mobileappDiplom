@@ -85,7 +85,7 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
         ),
       );
       sectionDataList.add(children);
-  }
+    }
     return sectionDataList;
   }
   // Весь виджет для вывода процентов, валюты и палосочки

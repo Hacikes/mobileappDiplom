@@ -5,7 +5,9 @@ import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 
 class TypeOfCurrencyInstrumentsPercent {
-  double type_of_currency_instruments_percent = 0.0;
+  List<String> keys = [];
+  List<double> values = [];
+
   TypeOfCurrencyInstrumentsPercent();
 
 // Получение информации о доли валюты в различных инструментах
@@ -28,13 +30,25 @@ class TypeOfCurrencyInstrumentsPercent {
       // print('Успешный ответ: $url');
       print('Успешный ответ при получении доли валюты в интсрументах для пользователя: ${response.statusCode}');
 
-      // Распарсиваем тело ответа
-      final data = jsonDecode(response.body);
-      final percentByInstrumentType = List<Map<String, dynamic>>.from(data['percent_by_instrument_type']);
-      final typeInstrumentsPercent = percentByInstrumentType.map((item) => item.values.first.toDouble()).toList();
-      print(percentByInstrumentType);
+      // Парсим тело ответа
+      Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
+      // print(decodedJson);
 
+      List<dynamic> percentCurrencyOnAllInstruments = decodedJson['percent_by_instrument_type'];
+      // print('percent_by_instrument_type: ${percentCurrencyOnAllInstruments}');
 
+      for (Map<String, dynamic> assets in percentCurrencyOnAllInstruments) {
+        assets.forEach((key, value) {
+          keys.add(key);
+          if (value is double) {
+            values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
+          } else if (value is int) {
+            values.add(value.toDouble());
+          }
+        });
+      }
+      // print('Ключи: ${keys}');
+      // print('Значения: ${values}');
     } else {
       // Обработка ошибки
       print('Ошибка при получении доли валюты в интсрументах для пользователя: ${response.statusCode}');
