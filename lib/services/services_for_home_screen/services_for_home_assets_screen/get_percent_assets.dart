@@ -16,7 +16,7 @@ class TypeOfCurrencyInstrumentsPercent {
     final signInService = SingInService();
     await signInService.getUserId();
 
-    final url = Uri.parse('http://80.90.179.158:9999/intruments_volume/$userid/percent_by_instrument_type');
+    final url = Uri.parse('http://80.90.179.158:9999/intruments_volume/$userid/percent_by_instrument_type_by_user');
     final headers = {
       'Accept': 'application/json',
       'Accept-Encoding': 'gzip, deflate',
@@ -28,7 +28,7 @@ class TypeOfCurrencyInstrumentsPercent {
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
       // print('Успешный ответ: $url');
-      print('Успешный ответ при получении доли валюты в интсрументах для пользователя: ${response.statusCode}');
+      print('Успешный ответ при получении доли активов для пользователя: ${response.statusCode}');
 
       // Парсим тело ответа
       Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));

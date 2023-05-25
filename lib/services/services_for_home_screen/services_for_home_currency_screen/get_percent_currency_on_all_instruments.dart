@@ -17,7 +17,7 @@ class ShareOfCurrencyInAllInstruments {
     await signInService.getUserId();
 
     final url = Uri.parse(
-        'http://80.90.179.158:9999/intruments_volume/$userid/percent_currency_on_all_instruments');
+        'http://80.90.179.158:9999/intruments_volume/$userid/percent_currency_on_all_instruments_by_user');
     final headers = {
       'Accept': 'application/json',
       'Accept-Encoding': 'gzip, deflate',
