@@ -6,6 +6,8 @@ import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 class TotalVolumeCurrencyInRUB {
   String totalSum ='';
+  // Символ рубля в utf8
+  String utf8RUB = '\u20BD';
   // int? userId ;
   TotalVolumeCurrencyInRUB();
 
@@ -29,11 +31,11 @@ class TotalVolumeCurrencyInRUB {
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
       // print('Успешный ответ: $url');
-      print('Успешный ответ при получении общего количества денег: ${response.statusCode}');
+      print('Хомяк --- Успешный ответ при получении общего количества денег: ${response.statusCode}');
 
       // Получение из ответа totalSum
       double data = jsonDecode(response.body);
-      totalSum = '$data';
+      totalSum = '$data $utf8RUB';
 
       //totalSum = data['totalVolumeInRUB'].toDouble();
       //print(totalSum);

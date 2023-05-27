@@ -1,22 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
+import 'package:mobile_app_diplom/screen/home/home_button/home_button_company.dart';
 // import 'package:pie_chart/pie_chart.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_currency.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_currency.dart';
 
+import 'home_button/home_button_instruments.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key, required this.toggleView}) : super(key: key);
+
+class HomeCompany extends StatefulWidget {
+  const HomeCompany({Key? key, required this.toggleView}) : super(key: key);
 
   final Function toggleView;
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeCompany> createState() => _HomeCompanyState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeCompanyState extends State<HomeCompany> {
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             const SizedBox(height: 10.0,),
-            home_button_currency(toggleView: widget.toggleView,),
+            home_button_company(toggleView: widget.toggleView,),
             const SizedBox(height: 10,),
             home_currency_dashboard(),
             // SizedBox(height: 0.0,),

@@ -29,9 +29,7 @@ class ShareOfCurrencyInAllInstruments {
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
       // print('Успешный ответ: $url');
-      print(
-          'Успешный ответ при получении доли валюты в интсрументах для пользователя: ${response
-              .statusCode}');
+      print('Хомяк-Валюта --- Успешный ответ при получении доли валюты в инструментах для пользователя: ${response.statusCode}');
 
       // Парсим тело ответа
       Map<String, dynamic> decodedJson = jsonDecode(response.body);
@@ -57,7 +55,7 @@ class ShareOfCurrencyInAllInstruments {
     } else {
         // Обработка ошибки
         print(
-            'Ошибка при получении доли валюты в интсрументах для пользователя: ${response
+            'Ошибка при получении доли валюты в инструментах для пользователя: ${response
                 .statusCode}');
       }
     }

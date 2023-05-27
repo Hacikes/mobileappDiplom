@@ -4,19 +4,19 @@ import 'dart:convert';
 import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 
-class TypeOfCurrencyInstrumentsPercent {
+class TypeOfInstrumentsPercent {
   List<String> keys = [];
   List<double> values = [];
 
-  TypeOfCurrencyInstrumentsPercent();
+  TypeOfInstrumentsPercent();
 
 // Получение информации о доли валюты в различных инструментах
-  Future <void> getTypeOfCurrencyInstrumentsPercent() async {
+  Future <void> getTypeOfInstrumentsPercent() async {
 
     final signInService = SingInService();
     await signInService.getUserId();
 
-    final url = Uri.parse('http://80.90.179.158:9999/intruments_volume/$userid/percent_by_instrument_type_by_user');
+    final url = Uri.parse('http://80.90.179.158:9999/intruments_volume/user/${userid}/percent_for_instrument_name_for_user');
     final headers = {
       'Accept': 'application/json',
       'Accept-Encoding': 'gzip, deflate',
@@ -28,17 +28,22 @@ class TypeOfCurrencyInstrumentsPercent {
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
       // print('Успешный ответ: $url');
-      print('Хомяк-Активы -- Успешный ответ при получении доли активов для пользователя: ${response.statusCode}');
+      print('Хомяк-Инструменты -- Успешный ответ при получении доли инструментов для пользователя: ${response.statusCode}');
 
       // Парсим тело ответа
       Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
-      // print(decodedJson);
+      //print(decodedJson);
 
-      List<dynamic> percentCurrencyOnAllInstruments = decodedJson['percent_by_instrument_type'];
-      print('percent_by_instrument_type: ${percentCurrencyOnAllInstruments}');
+      List<dynamic> AllInstruments = decodedJson['percent_for_instrument_name_for_user'];
+      //print('percent_by_instrument_type: ${AllInstruments}');
 
-      for (Map<String, dynamic> assets in percentCurrencyOnAllInstruments) {
-        assets.forEach((key, value) {
+      List<Map<String, dynamic>> shareList = decodedJson['percent_for_instrument_name_for_user']
+          .map<Map<String, dynamic>>((item) => <String, dynamic>{item.keys.first: item[item.keys.first]['share']})
+          .toList();
+      //print(shareList);
+
+      for (Map<String, dynamic> instruments in shareList) {
+        instruments.forEach((key, value) {
           keys.add(key);
           if (value is double) {
             values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
@@ -51,7 +56,7 @@ class TypeOfCurrencyInstrumentsPercent {
       // print('Значения: ${values}');
     } else {
       // Обработка ошибки
-      print('Ошибка при получении доли активов для пользователя: ${response.statusCode}');
+      print('Ошибка при получении доли инструментов для пользователя: ${response.statusCode}');
       // print('Успешный ответ: $url');
     }
     // return totalSum;

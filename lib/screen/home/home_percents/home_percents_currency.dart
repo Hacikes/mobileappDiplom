@@ -3,7 +3,7 @@ import 'package:mobile_app_diplom/services/services_for_home_screen/services_for
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
 
 class HomeCurrencyPercents extends StatefulWidget {
-  const HomeCurrencyPercents({Key? key}) : super(key: key);
+  HomeCurrencyPercents({Key? key}) : super(key: key);
 
   @override
   State<HomeCurrencyPercents> createState() => _HomeCurrencyPercentsState();
@@ -50,7 +50,7 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 60,
+              width: 100,
               child: Text(
                 StartCurrencyName[i],
                 style: TextStyle(
@@ -62,7 +62,7 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
             ),
             //SizedBox(width: 20,),
             Container(
-              width: 200.0,
+              width: 160.0,
               height: 16.0,
               decoration: BoxDecoration(
                 color: colors[i],

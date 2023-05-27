@@ -4,19 +4,23 @@ import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
 // import 'package:pie_chart/pie_chart.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_dashboard/home_instruments_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_instruments.dart';
+
+import 'home_button/home_button_instruments.dart';
 
 
-class Home extends StatefulWidget {
-  const Home({Key? key, required this.toggleView}) : super(key: key);
+class HomeInstruments extends StatefulWidget {
+  const HomeInstruments({Key? key, required this.toggleView}) : super(key: key);
 
   final Function toggleView;
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeInstruments> createState() => _HomeInstrumentsState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeInstrumentsState extends State<HomeInstruments> {
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +54,11 @@ class _HomeState extends State<Home> {
               ),
             ),
             const SizedBox(height: 10.0,),
-            home_button_currency(toggleView: widget.toggleView,),
+            home_button_instruments(toggleView: widget.toggleView,),
             const SizedBox(height: 10,),
-            home_currency_dashboard(),
+            home_instruments_dashboard(),
             // SizedBox(height: 0.0,),
-            HomeCurrencyPercents(),
+            HomeInstrumentsPercents(),
             const SizedBox(height: 10,),
             const button_Get_list(),
           ],

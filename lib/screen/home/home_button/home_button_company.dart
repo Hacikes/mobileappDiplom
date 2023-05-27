@@ -4,16 +4,16 @@ import 'package:mobile_app_diplom/screen/home/home_company.dart';
 import 'package:mobile_app_diplom/screen/home/home_instruments.dart';
 import 'package:mobile_app_diplom/screen/home/home_currency.dart';
 
-class home_button_assets extends StatefulWidget {
-  const home_button_assets({Key? key, required this.toggleView}) : super(key: key);
+class home_button_company extends StatefulWidget {
+  const home_button_company({Key? key, required this.toggleView}) : super(key: key);
 
   final Function toggleView;
 
   @override
-  State<home_button_assets> createState() => _home_button_assetsState();
+  State<home_button_company> createState() => _home_button_companyState();
 }
 
-class _home_button_assetsState extends State<home_button_assets> {
+class _home_button_companyState extends State<home_button_company> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -59,7 +59,6 @@ class _home_button_assetsState extends State<home_button_assets> {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -75,6 +74,7 @@ class _home_button_assetsState extends State<home_button_assets> {
               );
             },
             style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.grey,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),

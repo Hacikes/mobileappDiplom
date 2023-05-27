@@ -5,7 +5,7 @@ import 'package:mobile_app_diplom/services/services_for_home_screen/services_for
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
 
 class home_currency_dashboard extends StatefulWidget {
-  const home_currency_dashboard({Key? key}) : super(key: key);
+  home_currency_dashboard({Key? key}) : super(key: key);
 
   @override
   State<home_currency_dashboard> createState() => _home_currency_dashboardState();

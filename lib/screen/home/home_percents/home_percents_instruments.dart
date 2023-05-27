@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
+import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_instruments.dart';
 
-class HomeAssetsPercents extends StatefulWidget {
-  HomeAssetsPercents({Key? key}) : super(key: key);
+class HomeInstrumentsPercents extends StatefulWidget {
+  HomeInstrumentsPercents({Key? key}) : super(key: key);
 
   @override
-  State<HomeAssetsPercents> createState() => _HomeAssetsPercentsState();
+  State<HomeInstrumentsPercents> createState() => _HomeInstrumentsPercentsState();
 }
 
-class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
+class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
 
   List<String> StartCurrencyName = ['XXX'];
-  List<double> StartCurrencyPercent = [0.0];
-  List<Container> ContainerPercentsCurrency = [];
+  List<double> StartInstrumentsPercent = [0.0];
+  List<Container> ContainerPercentsInstruments = [];
 
 
 
-  Future<void> setupAssentsNameAndAssentsPercent() async {
-    TypeOfCurrencyInstrumentsPercent instance = TypeOfCurrencyInstrumentsPercent();
-    await instance.getTypeOfCurrencyInstrumentsPercent();
+  Future<void> setupInstrumentsNameAndAssentsPercent() async {
+    TypeOfInstrumentsPercent instance = TypeOfInstrumentsPercent();
+    await instance.getTypeOfInstrumentsPercent();
     ColorsForDashboard;
     // print(instance.keys);
     // print(instance.values);
     setState(() {
       StartCurrencyName = instance.keys;
-      StartCurrencyPercent = instance.values;
-      ContainerPercentsCurrency = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
+      StartInstrumentsPercent = instance.values;
+      ContainerPercentsInstruments = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
     });
   }
 
@@ -63,7 +64,7 @@ class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
             SizedBox(
               width: 60,
               child: Text(
-                '${StartCurrencyPercent[i]} %',
+                '${StartInstrumentsPercent[i]} %',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 16.0,
@@ -86,7 +87,7 @@ class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
       height: 195,
       child: SingleChildScrollView(
         child: Column(
-          children: ContainerPercentsCurrency,
+          children: ContainerPercentsInstruments,
         ),
       ),
     );
@@ -95,7 +96,7 @@ class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
   @override
   void initState(){
     super.initState();
-    setupAssentsNameAndAssentsPercent();
+    setupInstrumentsNameAndAssentsPercent();
 
   }
 }
