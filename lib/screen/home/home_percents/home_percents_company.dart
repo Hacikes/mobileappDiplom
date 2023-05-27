@@ -1,41 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
+import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_companies.dart';
 //import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_instruments.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_instruments_screen/get_percent_instruments.dart';
 
-class HomeInstrumentsPercents extends StatefulWidget {
-  HomeInstrumentsPercents({Key? key}) : super(key: key);
+class HomeCompaniesPercents extends StatefulWidget {
+  HomeCompaniesPercents({Key? key}) : super(key: key);
 
   @override
-  State<HomeInstrumentsPercents> createState() => _HomeInstrumentsPercentsState();
+  State<HomeCompaniesPercents> createState() => _HomeCompaniesPercentsState();
 }
 
-class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
+class _HomeCompaniesPercentsState extends State<HomeCompaniesPercents> {
 
-  List<String> StartCurrencyName = ['XXX'];
-  List<double> StartInstrumentsPercent = [0.0];
-  List<Container> ContainerPercentsInstruments = [];
+  List<String> StartCompaniesName = ['XXX'];
+  List<double> StartCompaniesPercent = [0.0];
+  List<Container> ContainerPercentsCompanies = [];
 
 
 
-  Future<void> setupInstrumentsNameAndAssentsPercent() async {
-    TypeOfInstrumentsPercent instance = TypeOfInstrumentsPercent();
-    await instance.getTypeOfInstrumentsPercent();
+  Future<void> setupCompaniesNameAndAssentsPercent() async {
+    TypeOfCompanyPercent instance = TypeOfCompanyPercent();
+    await instance.getTypeOfCompanyPercent();
     ColorsForDashboard;
     // print(instance.keys);
     // print(instance.values);
     setState(() {
-      StartCurrencyName = instance.keys;
-      StartInstrumentsPercent = instance.values;
-      ContainerPercentsInstruments = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
+      StartCompaniesName = instance.keys;
+      StartCompaniesPercent = instance.values;
+      ContainerPercentsCompanies = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
     });
   }
 
 
   List<Container> generateContainerPercentsCurrency(List<Color> colors) {
     List<Container> sectionDataList = [];
-    for (int i = 0; i < StartCurrencyName.length; i++) {
+    for (int i = 0; i < StartCompaniesName.length; i++) {
       final children =
       Container(
         padding: EdgeInsets.all(12),
@@ -45,7 +46,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
             SizedBox(
               width: 100,
               child: Text(
-                StartCurrencyName[i],
+                StartCompaniesName[i],
                 style: TextStyle(
                   fontSize: 16.0,
                   color: Colors.white,
@@ -65,7 +66,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
             SizedBox(
               width: 60,
               child: Text(
-                '${StartInstrumentsPercent[i]} %',
+                '${StartCompaniesPercent[i]} %',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 16.0,
@@ -88,7 +89,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
       height: 195,
       child: SingleChildScrollView(
         child: Column(
-          children: ContainerPercentsInstruments,
+          children: ContainerPercentsCompanies,
         ),
       ),
     );
@@ -97,7 +98,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
   @override
   void initState(){
     super.initState();
-    setupInstrumentsNameAndAssentsPercent();
+    setupCompaniesNameAndAssentsPercent();
 
   }
 }

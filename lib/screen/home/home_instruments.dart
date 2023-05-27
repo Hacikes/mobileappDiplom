@@ -44,7 +44,7 @@ class _HomeInstrumentsState extends State<HomeInstruments> {
             const Padding(
               padding: EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
               child: Text(
-                'General Info',
+                'По всем счетам',
                 style: TextStyle(
                   fontSize: 36.0,
                   color: Colors.white,

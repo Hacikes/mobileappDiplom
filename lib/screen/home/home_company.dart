@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_company.dart';
+import 'package:mobile_app_diplom/screen/home/home_dashboard/home_companies_dashboard.dart';
 // import 'package:pie_chart/pie_chart.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_company.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_currency.dart';
 
 import 'home_button/home_button_instruments.dart';
@@ -43,7 +45,7 @@ class _HomeCompanyState extends State<HomeCompany> {
             const Padding(
               padding: EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
               child: Text(
-                'General Info',
+                'По всем счетам',
                 style: TextStyle(
                   fontSize: 36.0,
                   color: Colors.white,
@@ -55,9 +57,9 @@ class _HomeCompanyState extends State<HomeCompany> {
             const SizedBox(height: 10.0,),
             home_button_company(toggleView: widget.toggleView,),
             const SizedBox(height: 10,),
-            home_currency_dashboard(),
+            home_companies_dashboard(),
             // SizedBox(height: 0.0,),
-            HomeCurrencyPercents(),
+            HomeCompaniesPercents(),
             const SizedBox(height: 10,),
             const button_Get_list(),
           ],

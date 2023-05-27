@@ -4,19 +4,19 @@ import 'dart:convert';
 import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
 
-class TypeOfCurrencyInstrumentsPercent {
+class TypeOfCompanyPercent {
   List<String> keys = [];
   List<double> values = [];
 
-  TypeOfCurrencyInstrumentsPercent();
+  TypeOfCompanyPercent();
 
 // Получение информации о доли валюты в различных инструментах
-  Future <void> getTypeOfCurrencyInstrumentsPercent() async {
+  Future <void> getTypeOfCompanyPercent() async {
 
     final signInService = SingInService();
     await signInService.getUserId();
 
-    final url = Uri.parse('http://80.90.179.158:9999/intruments_volume/$userid/percent_by_instrument_type_by_user');
+    final url = Uri.parse('http://80.90.179.158:9999/intruments_volume/${userid}/percent_of_companies_for_user');
     final headers = {
       'Accept': 'application/json',
       'Accept-Encoding': 'gzip, deflate',
@@ -28,17 +28,22 @@ class TypeOfCurrencyInstrumentsPercent {
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
       // print('Успешный ответ: $url');
-      print('Хомяк-Активы -- Успешный ответ при получении доли активов для пользователя: ${response.statusCode}');
+      print('Хомяк-Компании -- Успешный ответ при получении доли компаний для пользователя: ${response.statusCode}');
 
       // Парсим тело ответа
       Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
-      // print(decodedJson);
+      //print(decodedJson);
 
-      List<dynamic> percentCurrencyOnAllInstruments = decodedJson['percent_by_instrument_type'];
-      print('percent_by_instrument_type: ${percentCurrencyOnAllInstruments}');
+      List<dynamic> AllInstruments = decodedJson['percent_of_companies_for_user'];
+      //print('percent_by_instrument_type: ${AllInstruments}');
 
-      for (Map<String, dynamic> assets in percentCurrencyOnAllInstruments) {
-        assets.forEach((key, value) {
+      List<Map<String, dynamic>> shareList = decodedJson['percent_of_companies_for_user']
+          .map<Map<String, dynamic>>((item) => <String, dynamic>{item.keys.first: item[item.keys.first]['share']})
+          .toList();
+      //print(shareList);
+
+      for (Map<String, dynamic> companies in shareList) {
+        companies.forEach((key, value) {
           keys.add(key);
           if (value is double) {
             values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
@@ -51,7 +56,7 @@ class TypeOfCurrencyInstrumentsPercent {
       // print('Значения: ${values}');
     } else {
       // Обработка ошибки
-      print('Хомяк-Активы -- Ошибка при получении доли активов для пользователя: ${response.statusCode}');
+      print('Хомяк-Компании -- Ошибка при получении доли компаний для пользователя: ${response.statusCode}');
       // print('Успешный ответ: $url');
     }
     // return totalSum;

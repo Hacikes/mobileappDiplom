@@ -56,7 +56,7 @@ class TypeOfInstrumentsPercent {
       // print('Значения: ${values}');
     } else {
       // Обработка ошибки
-      print('Ошибка при получении доли инструментов для пользователя: ${response.statusCode}');
+      print('Хомяк-Инструменты -- Ошибка при получении доли инструментов для пользователя: ${response.statusCode}');
       // print('Успешный ответ: $url');
     }
     // return totalSum;
