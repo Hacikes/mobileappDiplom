@@ -4,9 +4,12 @@ import 'package:mobile_app_diplom/screen/home/home_currency.dart';
 import 'package:mobile_app_diplom/screen/loading/loading.dart';
 import 'package:mobile_app_diplom/screen/wrapper.dart';
 
-void main() => runApp(MaterialApp (
-  home: Wrapper()
-));
+void main() {
+  Function toggleView = () {};
+  runApp(MaterialApp(
+    home: Wrapper(toggleView: toggleView),
+  ));
+}
 
 
 // class MyApp extends StatelessWidget {
