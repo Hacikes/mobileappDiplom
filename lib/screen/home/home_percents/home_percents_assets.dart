@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/mock/mock_percents.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
-import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 
 class HomeAssetsPercents extends StatefulWidget {
   HomeAssetsPercents({Key? key}) : super(key: key);
@@ -20,13 +20,13 @@ class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
   Future<void> setupAssentsNameAndAssentsPercent() async {
     TypeOfCurrencyInstrumentsPercent instance = TypeOfCurrencyInstrumentsPercent();
     await instance.getTypeOfCurrencyInstrumentsPercent();
-    ColorsForDashboard;
+    ColorsClass;
     // print(instance.keys);
     // print(instance.values);
     setState(() {
       StartCurrencyName = instance.keys;
       StartCurrencyPercent = instance.values;
-      ContainerPercentsCurrency = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
+      ContainerPercentsCurrency = generateContainerPercentsCurrency(ColorsClass.getColors());
     });
   }
 
@@ -46,7 +46,7 @@ class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
                 StartCurrencyName[i],
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForGraphText(),
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -67,7 +67,7 @@ class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForGraphText(),
                   fontWeight: FontWeight.normal,
                 ),
               ),

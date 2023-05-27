@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/mock/mock_percents.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
-import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 //import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_instruments.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_instruments_screen/get_percent_instruments.dart';
 
@@ -22,13 +22,13 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
   Future<void> setupInstrumentsNameAndAssentsPercent() async {
     TypeOfInstrumentsPercent instance = TypeOfInstrumentsPercent();
     await instance.getTypeOfInstrumentsPercent();
-    ColorsForDashboard;
+    ColorsClass;
     // print(instance.keys);
     // print(instance.values);
     setState(() {
       StartCurrencyName = instance.keys;
       StartInstrumentsPercent = instance.values;
-      ContainerPercentsInstruments = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
+      ContainerPercentsInstruments = generateContainerPercentsCurrency(ColorsClass.getColors());
     });
   }
 
@@ -48,7 +48,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
                 StartCurrencyName[i],
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForGraphText(),
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -69,7 +69,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForGraphText(),
                   fontWeight: FontWeight.normal,
                 ),
               ),

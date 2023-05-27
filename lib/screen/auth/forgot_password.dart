@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
 import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/forgot_password.dart';
@@ -25,7 +26,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: ColorsClass.getBackgroundForSrceen(),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
@@ -36,10 +37,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             children: <Widget>[
               // SizedBox(height: 200.0,),
               Text(
-                'If you forget password send request email to test1232@gmail.com',
+                'Если вы забыли пароль, напишете нам test1232@gmail.com и мы восстановим',
                 style: TextStyle(
                   fontSize: 24.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForPopUpMessages(),
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -50,18 +51,15 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               TextButton(
                 onPressed: () {
                   // Действие при нажатии на кнопку
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView,)),
-                  );
+                  Navigator.pop(context);
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Sign In',
+                  'Вход',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,
                   ),
                 ),

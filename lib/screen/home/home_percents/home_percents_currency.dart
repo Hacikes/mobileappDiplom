@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/mock/mock_percents.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
-import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 
 class HomeCurrencyPercents extends StatefulWidget {
   HomeCurrencyPercents({Key? key}) : super(key: key);
@@ -20,12 +20,12 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
   Future<void> setupCurrencyNameAndCurrencyPercent() async {
     ShareOfCurrencyInAllInstruments instance = ShareOfCurrencyInAllInstruments();
     await instance.getShareOfCurrencyInAllInstruments();
-    ColorsForDashboard;
+    ColorsClass;
 
     setState(() {
       StartCurrencyName = instance.keys;
       StartCurrencyPercent = instance.values;
-      ContainerPercentsCurrency = generateContainerPercentsCurrency(ColorsForDashboard.getColors());
+      ContainerPercentsCurrency = generateContainerPercentsCurrency(ColorsClass.getColors());
     });
   }
 
@@ -45,7 +45,7 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
                 StartCurrencyName[i],
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForGraphText(),
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -66,7 +66,7 @@ class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
                 textAlign: TextAlign.right,
                 style: TextStyle(
                   fontSize: 16.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForGraphText(),
                   fontWeight: FontWeight.normal,
                 ),
               ),

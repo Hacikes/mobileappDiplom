@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
+import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_assets_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_assets.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_assets.dart';
-
 
 
 class HomeAssets extends StatefulWidget {
@@ -23,12 +24,12 @@ class _HomeAssetsState extends State<HomeAssets> {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Scaffold(
-        backgroundColor: Colors.black38,
+        backgroundColor: ColorsClass.getBackgroundForSrceen(),
         appBar: AppBar(
           title: Text('Home'),
-          backgroundColor: Colors.black54,
+          backgroundColor: ColorsClass.background_for_appbar,
           elevation: 0.0,
-          automaticallyImplyLeading: false, // Убираем кнопку "Назад"
+          automaticallyImplyLeading: true, // Убираем кнопку "Назад"
           actions: <Widget>[
           ],
         ),
@@ -43,7 +44,7 @@ class _HomeAssetsState extends State<HomeAssets> {
                 'По всем счетам',
                 style: TextStyle(
                   fontSize: 36.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForHeaderText(),
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.left,
@@ -59,6 +60,7 @@ class _HomeAssetsState extends State<HomeAssets> {
             button_Get_list(),
           ],
         ),
+        drawer: DrawlerFull(context).getDrawer(),
       ),
     );
   }

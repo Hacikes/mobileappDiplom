@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
+import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_company.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_companies_dashboard.dart';
-// import 'package:pie_chart/pie_chart.dart';
-import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
-import 'package:mobile_app_diplom/screen/home/home_button/home_button_currency.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_company.dart';
-import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_currency.dart';
-
-import 'home_button/home_button_instruments.dart';
 
 
 class HomeCompany extends StatefulWidget {
@@ -28,12 +24,12 @@ class _HomeCompanyState extends State<HomeCompany> {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Scaffold(
-        backgroundColor: Colors.black38,
+        backgroundColor: ColorsClass.getBackgroundForSrceen(),
         appBar: AppBar(
           title: const Text('Home'),
-          backgroundColor: Colors.black54,
+          backgroundColor: ColorsClass.getBackgroundForAppbar(),
           elevation: 0.0,
-          automaticallyImplyLeading: false, // Убираем кнопку "Назад"
+          automaticallyImplyLeading: true, // Убираем кнопку "Назад"
           actions: const <Widget>[
           ],
         ),
@@ -42,13 +38,13 @@ class _HomeCompanyState extends State<HomeCompany> {
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const SizedBox(height: 10.0,),
-            const Padding(
+            Padding(
               padding: EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
               child: Text(
                 'По всем счетам',
                 style: TextStyle(
                   fontSize: 36.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForHeaderText(),
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.left,
@@ -64,6 +60,7 @@ class _HomeCompanyState extends State<HomeCompany> {
             const button_Get_list(),
           ],
         ),
+        drawer: DrawlerFull(context).getDrawer(),
       ),
     );
   }

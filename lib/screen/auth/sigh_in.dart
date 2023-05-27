@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
 
@@ -28,7 +29,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: ColorsClass.getBackgroundForSrceen(),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
@@ -39,10 +40,10 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               // SizedBox(height: 200.0,),
                 Text(
-                'Login',
+                'Вход',
                 style: TextStyle(
                   fontSize: 36.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForNotPressedButton(),
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -56,22 +57,22 @@ class _SignInState extends State<SignIn> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Email',
+                  hintText: 'Почта',
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
                 validator: (val) {
                   if (val!.isEmpty) {
-                    return 'Enter email';
+                    return 'Введите почту';
                   } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
-                    return 'Enter valid email';
+                    return 'Введите почту в формате user@usermail.ru';
                   }
                   return null;
                 },
@@ -85,19 +86,19 @@ class _SignInState extends State<SignIn> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Password',
+                  hintText: 'Пароль',
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
                 obscureText: true,
-                validator: (val) => val!.isEmpty ? 'Enter password': null,
+                validator: (val) => val!.isEmpty ? 'Введите пароль': null,
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
@@ -139,17 +140,17 @@ class _SignInState extends State<SignIn> {
                   };
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[700]
+                    backgroundColor: ColorsClass.getBackgroundForNotPressedButton()
                 ),
                 child: Text(
-                  'Sign In',
-                  style: TextStyle(color:Colors.white),
+                  'Войти',
+                  style: TextStyle(color:ColorsClass.getFrontForNotPressedButton()),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   // Действие при нажатии на кнопку
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ForgotPassword(toggleView: widget.toggleView,)),
                   );
@@ -158,9 +159,9 @@ class _SignInState extends State<SignIn> {
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Forgot password',
+                  'Восстановить пароль',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,
                   ),
                 ),
@@ -168,7 +169,7 @@ class _SignInState extends State<SignIn> {
               TextButton(
                 onPressed: () async {
                   // Действие при нажатии на кнопку
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignUp(toggleView: widget.toggleView,)),
                   );
@@ -177,9 +178,9 @@ class _SignInState extends State<SignIn> {
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Create New Account',
+                  'Создать учётную запись',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,
                   ),
                 ),

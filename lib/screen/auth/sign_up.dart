@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/sign_up.dart';
 
@@ -28,7 +29,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: ColorsClass.getBackgroundForSrceen(),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
@@ -39,10 +40,10 @@ class _SignUpState extends State<SignUp> {
             children: <Widget>[
               // SizedBox(height: 200.0,),
               Text(
-                'Register',
+                'Регистрация',
                 style: TextStyle(
                   fontSize: 36.0,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForNotPressedButton(),
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -56,22 +57,22 @@ class _SignUpState extends State<SignUp> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Email',
+                  hintText: 'Почта',
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
                 validator: (val) {
                   if (val!.isEmpty) {
-                    return 'Enter email';
+                    return 'Введите почту';
                   } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
-                    return 'Enter valid email';
+                    return 'Введите почту в формате user@usermail.ru';
                   }
                   return null;
                 },
@@ -85,22 +86,22 @@ class _SignUpState extends State<SignUp> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Name',
+                  hintText: 'Имя',
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
                 validator: (val) {
                   if (val!.isEmpty) {
-                    return 'Enter name';
+                    return 'Введите имя';
                   } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
-                    return 'Enter valid name';
+                    return 'Спец. символы в имени не допустимы';
                   }
                   return null;
                 },
@@ -114,19 +115,19 @@ class _SignUpState extends State<SignUp> {
                 },
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
+                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Password',
+                  hintText: 'Пароль',
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
                 obscureText: true,
-                validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long': null,
+                validator: (val) => val!.length < 6 ? 'Введите пароль длиннее 6 символов': null,
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
@@ -169,28 +170,25 @@ class _SignUpState extends State<SignUp> {
                   };
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[700]
+                    backgroundColor: ColorsClass.getBackgroundForNotPressedButton()
                 ),
                 child: Text(
-                  'Sign Up',
-                  style: TextStyle(color:Colors.white),
+                  'Зарегистрироваться',
+                  style: TextStyle(color:ColorsClass.getFrontForNotPressedButton()),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   // Действие при нажатии на кнопку
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView,)),
-                  );
+                  Navigator.pop(context);
                 },
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Login',
+                  'Вход',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,
                   ),
                 ),

@@ -4,7 +4,7 @@ import 'package:mobile_app_diplom/mock/mock_dashboard.dart';
 import 'package:mobile_app_diplom/mock/mock_total_value_in_rub.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_companies.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_total_volume_currency_in_RUB.dart';
-import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_instruments_screen/get_percent_instruments.dart';
 
 class home_companies_dashboard extends StatefulWidget {
@@ -37,7 +37,7 @@ class _home_companies_dashboardState extends State<home_companies_dashboard> {
     //print(instance.values);
     setState(() {
       StartPie = instance.values;
-      pieChartSectionDatas = generatePieChartSectionData(ColorsForDashboard.getColors());
+      pieChartSectionDatas = generatePieChartSectionData(ColorsClass.getColors());
     });
   }
 
@@ -76,7 +76,7 @@ class _home_companies_dashboardState extends State<home_companies_dashboard> {
                   StartSum,
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: Colors.white,
+                    color: ColorsClass.getFrontForGraphText(),
                     fontWeight: FontWeight.bold,
                   ),
                 ),

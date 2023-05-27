@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/home/home_assets.dart';
 import 'package:mobile_app_diplom/screen/home/home_company.dart';
 import 'package:mobile_app_diplom/screen/home/home_instruments.dart';
@@ -74,7 +75,7 @@ class _home_button_companyState extends State<home_button_company> {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey,
+              backgroundColor: ColorsClass.getBackgroundForPressedButton(),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),

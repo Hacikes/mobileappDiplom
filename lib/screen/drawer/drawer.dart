@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/home/home_instruments.dart';
 
 class DrawlerFull {
@@ -12,26 +13,34 @@ class DrawlerFull {
     return Drawer(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[200], // задаем общий фон
+          color: ColorsClass.getBackgroundForHeaderDrawer(), // задаем общий фон
         ),
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.grey[700]!,
+                color: ColorsClass.getBackgroundForSrceen(),
               ),
               child: Text(
                 'Меню',
                 style: TextStyle(
                   fontSize: 24,
-                  color: Colors.white,
+                  color: ColorsClass.getFrontForNotPressedButton(),
                 ),
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home_outlined),
-              title: Text('Главная'),
+              leading: Icon(
+                  Icons.home_outlined,
+                  color: ColorsClass.getPouringForIcon(),
+              ),
+              title: Text(
+                  'Главная',
+                style: TextStyle(
+                  color: ColorsClass.getFrontForNotPressedButton(),
+                ),
+              ),
               onTap: () {
                 // Обработчик нажатия на пункт меню
                 Navigator.pushReplacement(
@@ -41,24 +50,48 @@ class DrawlerFull {
               },
             ),
             ListTile(
-              leading: Icon(Icons.account_balance_wallet_outlined),
-              title: Text('Счета'),
+              leading: Icon(
+                  Icons.account_balance_wallet_outlined,
+                  color: ColorsClass.getPouringForIcon(),
+              ),
+              title: Text(
+                'Счета',
+                style: TextStyle(
+                  color: ColorsClass.getFrontForNotPressedButton(),
+                ),
+              ),
               onTap: () {
                 // Обработчик нажатия на пункт меню
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.calculate_outlined),
-              title: Text('Калькулятор'),
+              leading: Icon(
+                  Icons.calculate_outlined,
+                  color: ColorsClass.getPouringForIcon(),
+              ),
+              title: Text(
+                  'Калькулятор',
+                style: TextStyle(
+                  color: ColorsClass.getFrontForNotPressedButton(),
+                ),
+              ),
               onTap: () {
                 // Обработчик нажатия на пункт меню
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings_outlined),
-              title: Text('Настройки'),
+              leading: Icon(
+                  Icons.settings_outlined,
+                  color: ColorsClass.getPouringForIcon(),
+              ),
+              title: Text(
+                  'Настройки',
+                style: TextStyle(
+                  color: ColorsClass.getFrontForNotPressedButton(),
+                ),
+              ),
               onTap: () {
                 // Обработчик нажатия на пункт меню
                 Navigator.pop(context);
@@ -67,8 +100,16 @@ class DrawlerFull {
             // Добавляем кнопку в нижней части боковой панели
             Spacer(),
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text('Выйти'),
+              leading: Icon(
+                  Icons.logout,
+                color: ColorsClass.getPouringForIcon(),
+              ),
+              title: Text(
+                  'Выйти',
+                style: TextStyle(
+                  color: ColorsClass.getFrontForNotPressedButton(),
+                ),
+              ),
               onTap: () {
                 // Обработчик нажатия на кнопку
                 Navigator.pop(context);
