@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/mock/mock_percents.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
 
@@ -12,26 +13,15 @@ class HomeCurrencyPercents extends StatefulWidget {
 class _HomeCurrencyPercentsState extends State<HomeCurrencyPercents> {
 
   List<String> StartCurrencyName = ['XXX'];
-  List<double> StartCurrencyPercent = [0.0];
-  List<Container> ContainerPercentsCurrency = [];
-
+  List<double> StartCurrencyPercent = [];
+  List<Container> ContainerPercentsCurrency = MockPercents.MockContainerPercentsCurrency;
 
 
   Future<void> setupCurrencyNameAndCurrencyPercent() async {
     ShareOfCurrencyInAllInstruments instance = ShareOfCurrencyInAllInstruments();
     await instance.getShareOfCurrencyInAllInstruments();
     ColorsForDashboard;
-    // List<Color> colors = [
-    //   Colors.green,
-    //   Colors.amber,
-    //   Colors.blue,
-    //   Colors.yellow,
-    //   Colors.red,
-    //   Colors.deepPurple
-    //   // Добавьте другие цвета, если необходимо
-    // ];
-    // print(instance.keys);
-    // print(instance.values);
+
     setState(() {
       StartCurrencyName = instance.keys;
       StartCurrencyPercent = instance.values;

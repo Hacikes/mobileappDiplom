@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/mock/mock_percents.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
 //import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_instruments.dart';
@@ -15,8 +16,7 @@ class _HomeInstrumentsPercentsState extends State<HomeInstrumentsPercents> {
 
   List<String> StartCurrencyName = ['XXX'];
   List<double> StartInstrumentsPercent = [0.0];
-  List<Container> ContainerPercentsInstruments = [];
-
+  List<Container> ContainerPercentsInstruments = MockPercents.MockContainerPercentsCurrency;
 
 
   Future<void> setupInstrumentsNameAndAssentsPercent() async {

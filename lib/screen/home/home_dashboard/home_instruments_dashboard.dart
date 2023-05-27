@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/mock/mock_dashboard.dart';
+import 'package:mobile_app_diplom/mock/mock_total_value_in_rub.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
 //import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_company_screen/get_percent_instruments.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_total_volume_currency_in_RUB.dart';
@@ -16,9 +18,9 @@ class home_instruments_dashboard extends StatefulWidget {
 class _home_instruments_dashboardState extends State<home_instruments_dashboard> {
 
 
-  String StartSum = "XXX XXX XXX XXX";
+  String StartSum = MockTotalValueInRub.MockStartSum;
   List<double> StartPie = [];
-  List<PieChartSectionData> pieChartSectionDatas = [];
+  List<PieChartSectionData> pieChartSectionDatas = MockDashboard.MockpieChartSectionDatas;
 
   Future<void> setupTotalVolume() async {
     TotalVolumeCurrencyInRUB instance = TotalVolumeCurrencyInRUB();

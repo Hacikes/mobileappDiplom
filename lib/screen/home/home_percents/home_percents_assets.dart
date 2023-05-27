@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/mock/mock_percents.dart';
 import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_assets_screen/get_percent_assets.dart';
 import 'package:mobile_app_diplom/color/colors_for_dashboard.dart';
 
@@ -12,9 +13,8 @@ class HomeAssetsPercents extends StatefulWidget {
 class _HomeAssetsPercentsState extends State<HomeAssetsPercents> {
 
   List<String> StartCurrencyName = ['XXX'];
-  List<double> StartCurrencyPercent = [0.0];
-  List<Container> ContainerPercentsCurrency = [];
-
+  List<double> StartCurrencyPercent = [];
+  List<Container> ContainerPercentsCurrency = MockPercents.MockContainerPercentsCurrency;
 
 
   Future<void> setupAssentsNameAndAssentsPercent() async {
