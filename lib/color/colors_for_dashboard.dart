@@ -8,8 +8,8 @@ class ColorsForDashboard {
     Colors.green[300]!,
     Colors.yellow[500]!,
     Colors.pink[500]!,
-    Colors.cyanAccent!,
-    Colors.orangeAccent!,
+    Colors.cyanAccent[500]!,
+    Colors.orangeAccent[500]!,
     Colors.red[100]!,
     // Добавьте другие цвета, если необходимо
   ];

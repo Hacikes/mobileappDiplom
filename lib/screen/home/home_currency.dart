@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
 import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
 // import 'package:pie_chart/pie_chart.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_currency_dashboard.dart';
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
           title: const Text('Home'),
           backgroundColor: Colors.black54,
           elevation: 0.0,
-          automaticallyImplyLeading: false, // Убираем кнопку "Назад"
+          automaticallyImplyLeading: true, // Убираем кнопку "Назад"
           actions: const <Widget>[
           ],
         ),
@@ -59,6 +60,7 @@ class _HomeState extends State<Home> {
             const button_Get_list(),
           ],
         ),
+          drawer: DrawlerFull(context).getDrawer(),
       ),
     );
   }
