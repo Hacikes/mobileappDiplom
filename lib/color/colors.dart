@@ -10,8 +10,8 @@ class ColorsClass {
     Colors.green[300]!,
     Colors.yellow[500]!,
     Colors.pink[500]!,
-    Colors.cyanAccent!,
-    Colors.orangeAccent!,
+    Colors.cyanAccent,
+    Colors.orangeAccent,
     Colors.red[100]!,
     // Добавьте другие цвета, если необходимо
   ];
@@ -20,7 +20,8 @@ class ColorsClass {
   static Color background_for_appbar = Colors.black54;
   static Color background_for_not_pressed_button = Colors.blue;
   static Color background_for_pressed_button = Colors.grey;
-  static Color background_for_header_drawer = Colors.grey[700]!;
+  static Color background_for_header_drawer = Colors.grey[800]!;
+  static Color background_for_body_drawer = Colors.grey[900]!;
 
 
 
@@ -59,9 +60,13 @@ class ColorsClass {
   static Color getBackgroundForPressedButton(){
     return background_for_pressed_button;
   }
-  // Для фона хежера выдвижной панели слева
+  // Для фона хедера выдвижной панели слева
   static Color getBackgroundForHeaderDrawer(){
     return background_for_header_drawer;
+  }
+  // Для фона тела выдвижной панели слева
+  static Color getBackgroundForBodyDrawer(){
+    return background_for_body_drawer;
   }
 
 

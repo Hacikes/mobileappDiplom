@@ -34,8 +34,8 @@ class TypeOfCompanyPercent {
       Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
       //print(decodedJson);
 
-      List<dynamic> AllInstruments = decodedJson['percent_of_companies_for_user'];
-      //print('percent_by_instrument_type: ${AllInstruments}');
+      // List<dynamic> AllInstruments = decodedJson['percent_of_companies_for_user'];
+      // //print('percent_by_instrument_type: ${AllInstruments}');
 
       List<Map<String, dynamic>> shareList = decodedJson['percent_of_companies_for_user']
           .map<Map<String, dynamic>>((item) => <String, dynamic>{item.keys.first: item[item.keys.first]['share']})

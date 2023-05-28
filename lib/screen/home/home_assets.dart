@@ -60,7 +60,7 @@ class _HomeAssetsState extends State<HomeAssets> {
             button_Get_list(),
           ],
         ),
-        drawer: DrawlerFull(context).getDrawer(),
+        drawer: DrawerFull(context: this.context,),
       ),
     );
   }

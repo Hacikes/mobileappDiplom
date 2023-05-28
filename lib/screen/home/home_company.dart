@@ -60,7 +60,7 @@ class _HomeCompanyState extends State<HomeCompany> {
             const button_Get_list(),
           ],
         ),
-        drawer: DrawlerFull(context).getDrawer(),
+        drawer: DrawerFull(context: this.context,),
       ),
     );
   }
