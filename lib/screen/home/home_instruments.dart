@@ -57,7 +57,7 @@ class _HomeInstrumentsState extends State<HomeInstruments> {
             // SizedBox(height: 0.0,),
             HomeInstrumentsPercents(),
             const SizedBox(height: 10,),
-            const button_Get_list(),
+            const button_get_list(),
           ],
         ),
         drawer: DrawerFull(context: this.context,),

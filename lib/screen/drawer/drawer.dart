@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/mock/mock_user_info_on_drawer.dart';
+import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
 import 'package:mobile_app_diplom/screen/home/home_currency.dart';
-import 'package:mobile_app_diplom/screen/home/home_instruments.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/logout.dart';
 import 'package:mobile_app_diplom/services/services_for_drawer/get_username_and_email.dart';
 
@@ -28,7 +28,7 @@ class _DrawerFullState extends State<DrawerFull> {
   Future<void> setupUserInfo() async {
     UserMe instance = UserMe();
     await instance.getUserMe();
-    print(instance.username);
+    //print(instance.username);
     //print(instance.email);
     setState(() {
       username_on_drawer = instance.username;
@@ -39,11 +39,7 @@ class _DrawerFullState extends State<DrawerFull> {
   Future<void> setupLogOut() async {
     LogOutService instance = LogOutService();
     await instance.logout();
-    // print(instance.username);
-    // print(instance.email);
     setState(() {
-      // username_on_drawer = instance.username;
-      // email_on_drawer = instance.email;
     });
   }
 
@@ -116,7 +112,10 @@ class _DrawerFullState extends State<DrawerFull> {
               ),
               onTap: () {
                 // Обработчик нажатия на пункт меню
-                Navigator.pop(context);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Accounts(toggleView: toggleView)),
+                );
               },
             ),
             ListTile(
@@ -152,11 +151,10 @@ class _DrawerFullState extends State<DrawerFull> {
               },
             ),
             // Добавляем кнопку в нижней части боковой панели
-            Spacer(),
             SizedBox(
               height: 1,
               child: Divider(
-                color: Colors.grey, // цвет черты
+                color: ColorsClass.color_for_devider, // цвет черты
                 thickness: 1, // толщина черты
                 indent: 16, // отступ слева
                 endIndent: 16, // отступ справа
@@ -174,21 +172,57 @@ class _DrawerFullState extends State<DrawerFull> {
                 ),
               ),
               onTap: () async {
-                final logoutService = LogOutService();
-                final statusCode = await logoutService.logout();
-                if (statusCode == 200) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView)),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Упс... Что-то пошло не так ...'),
-                      duration: Duration(seconds: 3),
-                    ),
-                  );
-                }
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: ColorsClass.getBackgroundForBodyDrawer(),
+                      title: Text(
+                        'Подтверждение выхода',
+                        style: TextStyle(color: ColorsClass.getFrontForNotPressedButton()),
+                      ),
+                      content: Text(
+                        'Вы уверены, что хотите выйти?',
+                        style: TextStyle(color: ColorsClass.getFrontForNotPressedButton()),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'Нет',
+                            style: TextStyle(color: ColorsClass.getFrontForNotPressedButton()),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            final logoutService = LogOutService();
+                            final statusCode = await logoutService.logout();
+                            if (statusCode == 200) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView)),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Упс... Что-то пошло не так ...'),
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
+                            }
+                          },
+                          child: Text(
+                            'Да',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

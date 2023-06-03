@@ -57,7 +57,7 @@ class _HomeAssetsState extends State<HomeAssets> {
             // SizedBox(height: 0.0,),
             HomeAssetsPercents(),
             SizedBox(height: 10,),
-            button_Get_list(),
+            button_get_list(),
           ],
         ),
         drawer: DrawerFull(context: this.context,),
