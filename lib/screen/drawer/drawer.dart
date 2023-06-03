@@ -83,7 +83,6 @@ class _DrawerFullState extends State<DrawerFull> {
                   ),
                 ],
               ),
-
             ),
             ListTile(
               leading: Icon(
@@ -154,6 +153,15 @@ class _DrawerFullState extends State<DrawerFull> {
             ),
             // Добавляем кнопку в нижней части боковой панели
             Spacer(),
+            SizedBox(
+              height: 1,
+              child: Divider(
+                color: Colors.grey, // цвет черты
+                thickness: 1, // толщина черты
+                indent: 16, // отступ слева
+                endIndent: 16, // отступ справа
+              ),
+            ),
             ListTile(
               leading: Icon(
                 Icons.logout_outlined,
