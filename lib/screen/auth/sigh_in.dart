@@ -2,10 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/auth/sign_up.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_currency.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/sign_in.dart';
-
 import 'package:mobile_app_diplom/screen/auth/forgot_password.dart';
-import '../home/home_currency.dart';
 
 
 class SignIn extends StatefulWidget {

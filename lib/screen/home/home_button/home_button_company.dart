@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
-import 'package:mobile_app_diplom/screen/home/home_assets.dart';
-import 'package:mobile_app_diplom/screen/home/home_company.dart';
-import 'package:mobile_app_diplom/screen/home/home_instruments.dart';
-import 'package:mobile_app_diplom/screen/home/home_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_assets.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_company.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_instruments.dart';
+
 
 class home_button_company extends StatefulWidget {
   const home_button_company({Key? key, required this.toggleView}) : super(key: key);

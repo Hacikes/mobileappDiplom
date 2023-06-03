@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_button/account_button_assets.dart';
 import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_dashboard/account_assets_dashboard.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_percents/account_details_assets.dart';
-import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
-import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
-import 'package:mobile_app_diplom/screen/home/home_dashboard/home_assets_dashboard.dart';
-import 'package:mobile_app_diplom/screen/home/home_button/home_button_assets.dart';
-import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_assets.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_percents/account_percents_details_assets.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/button_get_list.dart';
 
 
 class AccountDetailsAssets extends StatefulWidget {
@@ -63,7 +59,7 @@ class _AccountDetailsAssetsState extends State<AccountDetailsAssets> {
             // SizedBox(height: 0.0,),
             AccountDetailsAssetsPercents(),
             SizedBox(height: 10,),
-            button_get_list(),
+            button_get_list_by_account(),
           ],
         ),
         // drawer: DrawerFull(context: this.context,),

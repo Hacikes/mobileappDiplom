@@ -1,18 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_button/account_button_company.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_dashboard/account_companies_dashboard.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_percents/account_details_company.dart';
-import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
-import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
-import 'package:mobile_app_diplom/screen/home/home_button/home_button_company.dart';
-import 'package:mobile_app_diplom/screen/home/home_dashboard/home_companies_dashboard.dart';
-import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_company.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_button/account_button_instruments.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_dashboard/account_instruments_dashboard.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_percents/account_percents_details_instruments.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/button_get_list.dart';
 
 
-class AccountDetailsCompany extends StatefulWidget {
-  const AccountDetailsCompany({Key? key, required this.toggleView, required this.AccountIdForDetails, required this.AccountNameForDetails, required this.BrokerNameForDetails}) : super(key: key);
+class AccountDetailsInstruments extends StatefulWidget {
+  const AccountDetailsInstruments({Key? key, required this.toggleView, required this.AccountIdForDetails, required this.AccountNameForDetails, required this.BrokerNameForDetails}) : super(key: key);
   final int AccountIdForDetails;
   final String AccountNameForDetails;
   final String BrokerNameForDetails;
@@ -20,10 +16,10 @@ class AccountDetailsCompany extends StatefulWidget {
   final Function toggleView;
 
   @override
-  State<AccountDetailsCompany> createState() => _AccountDetailsCompanyState();
+  State<AccountDetailsInstruments> createState() => _AccountDetailsInstrumentsState();
 }
 
-class _AccountDetailsCompanyState extends State<AccountDetailsCompany> {
+class _AccountDetailsInstrumentsState extends State<AccountDetailsInstruments> {
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +53,13 @@ class _AccountDetailsCompanyState extends State<AccountDetailsCompany> {
               ),
             ),
             const SizedBox(height: 10.0,),
-            account_details_button_company(toggleView: widget.toggleView, AccountIdForDetails: widget.AccountIdForDetails, AccountNameForDetails: widget.AccountNameForDetails, BrokerNameForDetails: widget.BrokerNameForDetails),
+            account_details_button_instruments(toggleView: widget.toggleView, AccountIdForDetails: widget.AccountIdForDetails, AccountNameForDetails: widget.AccountNameForDetails, BrokerNameForDetails: widget.BrokerNameForDetails),
             const SizedBox(height: 10,),
-            account_details_companies_dashboard(),
+            account_details_instruments_dashboard(),
             // SizedBox(height: 0.0,),
-            AccountDelailsCompaniesPercents(),
+            AccountDetailsInstrumentsPercents(),
             const SizedBox(height: 10,),
-            const button_get_list(),
+            const button_get_list_by_account(),
           ],
         ),
         // drawer: DrawerFull(context: this.context,),

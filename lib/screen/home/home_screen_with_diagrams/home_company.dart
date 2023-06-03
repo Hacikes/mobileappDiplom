@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
-import 'package:mobile_app_diplom/screen/home/button_get_list.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/button_get_list.dart';
 import 'package:mobile_app_diplom/screen/home/home_button/home_button_company.dart';
 import 'package:mobile_app_diplom/screen/home/home_dashboard/home_companies_dashboard.dart';
 import 'package:mobile_app_diplom/screen/home/home_percents/home_percents_company.dart';

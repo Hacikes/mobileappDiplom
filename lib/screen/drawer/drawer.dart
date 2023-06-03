@@ -4,7 +4,7 @@ import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/mock/mock_user_info_on_drawer.dart';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
-import 'package:mobile_app_diplom/screen/home/home_currency.dart';
+import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_currency.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/logout.dart';
 import 'package:mobile_app_diplom/services/services_for_drawer/get_username_and_email.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class button_get_list extends StatelessWidget {
-  const button_get_list({
+class button_get_list_by_account extends StatelessWidget {
+  const button_get_list_by_account({
     super.key,
   });
 
@@ -16,7 +16,7 @@ class button_get_list extends StatelessWidget {
           padding: EdgeInsets.only(bottom: 20),
           child: ElevatedButton(
             onPressed: () {},
-            child: Text("Get list"),
+            child: Text("Список инструментов"),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),

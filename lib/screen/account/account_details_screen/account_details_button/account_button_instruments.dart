@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_datails_assets.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_datails_company.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_datails_currency.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_datails_instruments.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/account_datails_assets.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/account_datails_company.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/account_datails_currency.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/account_datails_instruments.dart';
 
 class account_details_button_instruments extends StatefulWidget {
   const account_details_button_instruments({Key? key, required this.toggleView, required this.AccountIdForDetails, required this.AccountNameForDetails, required this.BrokerNameForDetails}) : super(key: key);
