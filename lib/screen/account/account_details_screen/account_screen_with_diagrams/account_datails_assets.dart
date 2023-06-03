@@ -4,7 +4,7 @@ import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_button/account_button_assets.dart';
 import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_dashboard/account_assets_dashboard.dart';
 import 'package:mobile_app_diplom/screen/account/account_details_screen/account_details_percents/account_percents_details_assets.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/button_get_list.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/button_get_list_by_account.dart';
 
 
 class AccountDetailsAssets extends StatefulWidget {
@@ -59,7 +59,7 @@ class _AccountDetailsAssetsState extends State<AccountDetailsAssets> {
             // SizedBox(height: 0.0,),
             AccountDetailsAssetsPercents(),
             SizedBox(height: 10,),
-            button_get_list_by_account(),
+            button_get_list_by_account(toggleView: widget.toggleView, AccountIdForDetails: widget.AccountIdForDetails, AccountNameForDetails: widget.AccountNameForDetails, BrokerNameForDetails: widget.BrokerNameForDetails),
           ],
         ),
         // drawer: DrawerFull(context: this.context,),
