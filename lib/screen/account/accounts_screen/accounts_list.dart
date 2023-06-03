@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
+import 'package:mobile_app_diplom/screen/account/account_details_screen/account_datails_currency.dart';
 import 'package:mobile_app_diplom/screen/account/edit_account_screen/edit_account_screen.dart';
 import 'package:mobile_app_diplom/services/services_for_account/services_for_accounts_srceen/delete_account.dart';
 import 'package:mobile_app_diplom/services/services_for_account/services_for_accounts_srceen/get_accounts_for_accounts_screen.dart';
 import 'package:mobile_app_diplom/mock/mock_accounts_list.dart';
+
+
+int? GlobalAccountId;
 
 class AccountsList extends StatefulWidget {
   const AccountsList({Key? key, required this.toggleView}) : super(key: key);
@@ -31,6 +35,12 @@ class _AccountsListState extends State<AccountsList> {
       startSumForAccount = instance.totalSumForAccount;
       accountsId = instance.accountId;
     });
+  }
+
+  // Функция записывающая account_id в глобальную переменную
+  void setGlobalAccountId(int value) {
+    GlobalAccountId = value;
+    //print(GlobalAccountId);
   }
 
   @override
@@ -156,7 +166,11 @@ class _AccountsListState extends State<AccountsList> {
                     ),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    setGlobalAccountId(accountsId[index]);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AccountDetailsCurrency(toggleView: widget.toggleView, AccountIdForDetails: accountsId[index], AccountNameForDetails: startAccountNames[index], BrokerNameForDetails: startBrokerNames[index])),
+                    );
                   },
                 ),
               ),
