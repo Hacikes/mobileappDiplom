@@ -27,6 +27,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsClass.getBackgroundForSrceen(),
+      appBar: AppBar(
+        title: const Text('Восстановление пароля'),
+        backgroundColor: ColorsClass.getBackgroundForAppbar(),
+        elevation: 0.0,
+        automaticallyImplyLeading: true,
+        actions: const <Widget>[],
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
@@ -37,7 +44,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             children: <Widget>[
               // SizedBox(height: 200.0,),
               Text(
-                'Если вы забыли пароль, напишете нам test1232@gmail.com и мы восстановим',
+                'Если вы забыли пароль, напишете нам test1232@gmail.com и мы его восстановим',
                 style: TextStyle(
                   fontSize: 24.0,
                   color: ColorsClass.getFrontForPopUpMessages(),
@@ -57,7 +64,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Вход',
+                  'Войти',
                   style: TextStyle(
                     color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,

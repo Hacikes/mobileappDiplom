@@ -36,6 +36,7 @@ dependencies:
   mailer: ^6.0.1
   #  pie_chart: ^5.3.2
   fl_chart: ^0.62.0
+  multi_long_press_gesture_recognizer: ^0.0.1+2
 
 
   # The following adds the Cupertino Icons font to your application.

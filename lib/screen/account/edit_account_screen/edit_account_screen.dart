@@ -5,33 +5,36 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
+import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts.dart';
 import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
+import 'package:mobile_app_diplom/services/services_for_account/services_for_accounts_srceen/add_account.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/sign_up.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key, required this.toggleView}) : super(key: key);
-
+class EditAccount extends StatefulWidget {
+  const EditAccount({Key? key, required this.toggleView, required this.AccountName, required this.brokerName}) : super(key: key);
+  final String AccountName;
+  final String brokerName;
   final Function toggleView;
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<EditAccount> createState() => _EditAccountState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _EditAccountState extends State<EditAccount> {
 
   final _formKey = GlobalKey<FormState>();
 
   // Вводимые при регистрации поля
-  String email = '';
-  String username = '';
-  String password = '';
+  String accountName = '';
+  String brokerName = '';
+  int accountId = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsClass.getBackgroundForSrceen(),
       appBar: AppBar(
-        title: const Text('Регистрация'),
+        title: const Text('Редактирование счёта'),
         backgroundColor: ColorsClass.getBackgroundForAppbar(),
         elevation: 0.0,
         automaticallyImplyLeading: true,
@@ -42,24 +45,16 @@ class _SignUpState extends State<SignUp> {
         child: Form(
           key: _formKey,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               // SizedBox(height: 200.0,),
-              Text(
-                'Регистрация',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  color: ColorsClass.getFrontForNotPressedButton(),
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
               SizedBox(height: 10.0,),
               TextFormField(
+                initialValue: widget.AccountName,
                 onChanged: (value) {
                   setState(() {
-                    email = value;
+                    accountName = value;
                   });
                 },
                 decoration: InputDecoration(
@@ -71,43 +66,14 @@ class _SignUpState extends State<SignUp> {
                     borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Почта',
+                  hintText: 'Наименование счёта',
                   filled: true,
                   fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
                 validator: (val) {
                   if (val!.isEmpty) {
-                    return 'Введите почту';
-                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val)) {
-                    return 'Введите почту в формате user@usermail.ru';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 10.0,),
-              TextFormField(
-                onChanged: (value) {
-                  setState(() {
-                    username = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: 'Имя',
-                  filled: true,
-                  fillColor: ColorsClass.getFrontForHintOnField(),
-                ),
-                validator: (val) {
-                  if (val!.isEmpty) {
-                    return 'Введите имя';
-                  } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
+                    return 'Введите новое наименование счёта';
+                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я]+$').hasMatch(val)) {
                     return 'Спец. символы в имени не допустимы';
                   }
                   return null;
@@ -115,9 +81,10 @@ class _SignUpState extends State<SignUp> {
               ),
               SizedBox(height: 10.0,),
               TextFormField(
+                initialValue: widget.brokerName,
                 onChanged: (value) {
                   setState(() {
-                    password = value;
+                    brokerName = value;
                   });
                 },
                 decoration: InputDecoration(
@@ -129,37 +96,42 @@ class _SignUpState extends State<SignUp> {
                     borderSide: BorderSide(color: ColorsClass.getBorderDecorationColor()),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  hintText: 'Пароль',
+                  hintText: 'Наименование брокера',
                   filled: true,
                   fillColor: ColorsClass.getFrontForHintOnField(),
                 ),
-                obscureText: true,
-                validator: (val) => val!.length < 6 ? 'Введите пароль длиннее 6 символов': null,
+                validator: (val) {
+                  if (val!.isEmpty) {
+                    return 'Введите новое наименование брокера';
+                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я]+$').hasMatch(val)) {
+                    return 'Спец. символы в имени не допустимы';
+                  }
+                  return null;
+                },
               ),
               SizedBox(height: 10.0),
               ElevatedButton(
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){
-                    print(username);
-                    print(email);
-                    print(password);
-                    final signInService = SingUpService();
+                    print(accountName);
+                    print(brokerName);
+                    final addAccountService = AddAccountService();
 
                     final statusCode =
-                    await signInService.signIn(email, username, password);
+                    await addAccountService.addAccount(accountName, brokerName);
                     switch (statusCode) {
-                      case 201:
-                      // Логин прошел успешно, переходим на экран Home
+                      case 200:
+                      // Создание счёта прошел успешно, возврат на список счетов
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView,)),
+                          MaterialPageRoute(builder: (context) => Accounts(toggleView: widget.toggleView,)),
                         );
                         break;
                       case 400:
                       // Ошибка 400, выводим сообщение об ошибке
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Пользователь с таким email уже существует'),
+                            content: Text('Необходимо заполнить все поля'),
                             duration: Duration(seconds: 3),
                           ),
                         );
@@ -177,32 +149,17 @@ class _SignUpState extends State<SignUp> {
                   };
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    minimumSize: Size(double.infinity, 40),
+                  backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: Size(double.infinity, 40),
                 ),
                 child: Text(
-                  'Зарегистрироваться',
+                  'Сохранить',
                   style: TextStyle(color:ColorsClass.getFrontForNotPressedButton()),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  // Действие при нажатии на кнопку
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                ),
-                child: Text(
-                  'Войти',
-                  style: TextStyle(
-                    color: ColorsClass.getFrontForNotPressedButton(),
-                    fontSize: 14.0,
-                  ),
-                ),
+
               ),
             ],
           ),

@@ -32,11 +32,11 @@ class _AccountsState extends State<Accounts> {
         ),
         body: Column(
           children: [
-            accounts_list(toggleView: widget.toggleView),
+            AccountsList(toggleView: widget.toggleView),
             SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: button_get_account(),
+              child: button_get_account(toggleView: widget.toggleView,),
             ),
           ],
         ),

@@ -140,7 +140,11 @@ class _SignInState extends State<SignIn> {
                   };
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorsClass.getBackgroundForNotPressedButton()
+                    backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  minimumSize: Size(double.infinity, 40),
                 ),
                 child: Text(
                   'Войти',
@@ -159,7 +163,7 @@ class _SignInState extends State<SignIn> {
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Восстановить пароль',
+                  'Забыли пароль?',
                   style: TextStyle(
                     color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,
@@ -178,7 +182,7 @@ class _SignInState extends State<SignIn> {
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 ),
                 child: Text(
-                  'Создать учётную запись',
+                  'Создать аккаунт',
                   style: TextStyle(
                     color: ColorsClass.getFrontForNotPressedButton(),
                     fontSize: 14.0,
