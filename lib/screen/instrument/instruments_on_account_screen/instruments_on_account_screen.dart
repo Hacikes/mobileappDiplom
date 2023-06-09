@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts_list.dart';
-import 'package:mobile_app_diplom/screen/account/accounts_screen/button_add_account.dart';
-import 'package:mobile_app_diplom/screen/drawer/drawer.dart';
 import 'package:mobile_app_diplom/screen/instrument/list_of_instruments/button_move_to_diagram_screen_by_account.dart';
 
 
@@ -20,6 +18,13 @@ class ListOfInstruments extends StatefulWidget {
 }
 
 class _ListOfInstrumentsState extends State<ListOfInstruments> {
+
+  List<String> StartInstrumentNames = [];
+  List<int> StartTotalQuantity = [];
+  List<double> StartAvgPrice = [];
+  List<String> StartCurrencyName = [];
+  List<String> StartInstrumentTypeName = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +60,6 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
             SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-
             ),
           ],
         ),
@@ -63,5 +67,4 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
       ),
     );
   }
-
 }
