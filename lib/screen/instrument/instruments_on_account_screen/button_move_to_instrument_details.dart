@@ -31,7 +31,7 @@ class _button_move_to_instrument_details_screen_by_accountState extends State<bu
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => instrumentDetailsScreen(toggleView: widget.toggleView)),
+                MaterialPageRoute(builder: (context) => addInstrumentScreen(toggleView: widget.toggleView)),
               );
             },
             child: Text("Добавить инструмент"),

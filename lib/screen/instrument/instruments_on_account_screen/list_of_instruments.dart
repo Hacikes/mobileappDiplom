@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/instrument/add_instrument_screen/add_instruments_screen.dart';
+import 'package:mobile_app_diplom/screen/instrument/instrument_details_screen/instrument_details_screen.dart';
 import 'package:mobile_app_diplom/services/services_for_instrument/get_instruments_on_account/get_list_of_instruments.dart';
+
+int? GlobalInstrumentId;
+
 
 class ListInstruments extends StatefulWidget {
   const ListInstruments({Key? key, required this.toggleView}) : super(key: key);
@@ -13,6 +17,7 @@ class ListInstruments extends StatefulWidget {
 }
 
 class _ListInstrumentsState extends State<ListInstruments> {
+  List<int> startInstrumentId = [0];
   List<String> startInstrumentNames = ['0'];
   List<int> startTotalQuantity = [0];
   List<double> startAvgPrice = [0.0];
@@ -28,12 +33,19 @@ class _ListInstrumentsState extends State<ListInstruments> {
     InstrumentsList instance = InstrumentsList();
     await instance.getInstrumentsList();
     setState(() {
+      startInstrumentId = instance.instrumentId;
       startInstrumentNames = instance.instrumentNames;
       startTotalQuantity = instance.totalQuantity;
       startAvgPrice = instance.avgPrice;
       startCurrencyName = instance.currencyName;
       startInstrumentTypeName = instance.instrumentTypeName;
     });
+  }
+
+  // Функция записывающая instrument_id в глобальную переменную
+  void setGlobalInstrumentId(int value) {
+    GlobalInstrumentId = value;
+    print(GlobalInstrumentId);
   }
 
   String getCurrencySymbol(String currency) {
@@ -61,7 +73,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
         child: ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: startInstrumentNames.length,
+          itemCount: startInstrumentId.length,
           itemBuilder: (context, index) {
             String currencySymbol = getCurrencySymbol(startCurrencyName[index]);
             return Column(
@@ -106,9 +118,10 @@ class _ListInstrumentsState extends State<ListInstruments> {
                     ),
                   ),
                   onTap: () {
+                    setGlobalInstrumentId(startInstrumentId[index]);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => addInstrumentScreen(toggleView: widget.toggleView)),
+                      MaterialPageRoute(builder: (context) => instrumentDetailsScreen(toggleView: widget.toggleView)),
                     );
                   },
                 ),

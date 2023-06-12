@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts_list.dart';
 
 class InstrumentsList {
+  List<int> instrumentId = [];
   List<String> instrumentNames = [];
   List<int> totalQuantity = [];
   List<double> avgPrice = [];
@@ -25,13 +26,14 @@ class InstrumentsList {
 
       print('Список инструментов счёта -- Успешный ответ при получении списка инструментов по счёту: ${response.statusCode}');
 
-      Map<String, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
-      List<Map<String, dynamic>> instrumentsByAccount =
-      List<Map<String, dynamic>>.from(decodedJson['instruments_by_account']);
+      Map<dynamic, dynamic> decodedJson = jsonDecode(utf8.decode(response.bodyBytes));
+      List<Map<dynamic, dynamic>> instrumentsByAccount =
+      List<Map<dynamic, dynamic>>.from(decodedJson['instruments_by_account']);
 
-      for (Map<String, dynamic> account in instrumentsByAccount) {
+      for (Map<dynamic, dynamic> account in instrumentsByAccount) {
         account.forEach((key, value) {
-          instrumentNames.add(key);
+          instrumentId.add(int.parse(key));
+          instrumentNames.add(value['instrument_name']);
           totalQuantity.add(value['total_quantity']);
           avgPrice.add(value['avg_price'].toDouble());
           currencyName.add(value['currency_name']);

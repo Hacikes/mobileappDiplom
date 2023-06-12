@@ -24,7 +24,7 @@ class _free_cash_panelState extends State<free_cash_panel> {
     // print(instance.accountId);
     setState(() {
       startValueFreeCash = instance.freeCash;
-      print(instance.freeCash);
+      // print(instance.freeCash);
     });
   }
 
