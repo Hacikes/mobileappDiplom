@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
-import 'package:mobile_app_diplom/screen/account/account_details_screen/account_screen_with_diagrams/account_datails_currency.dart';
-import 'package:mobile_app_diplom/screen/account/edit_account_screen/edit_account_screen.dart';
 import 'package:mobile_app_diplom/screen/instrument/add_instrument_screen/add_instruments_screen.dart';
-import 'package:mobile_app_diplom/services/services_for_account/services_for_accounts_srceen/delete_account.dart';
-import 'package:mobile_app_diplom/services/services_for_account/services_for_accounts_srceen/get_accounts_for_accounts_screen.dart';
-import 'package:mobile_app_diplom/mock/mock_accounts_list.dart';
 import 'package:mobile_app_diplom/services/services_for_instrument/get_instruments_on_account/get_list_of_instruments.dart';
-
-
-// int? GlobalAccountId;
 
 class ListInstruments extends StatefulWidget {
   const ListInstruments({Key? key, required this.toggleView}) : super(key: key);
@@ -26,25 +18,39 @@ class _ListInstrumentsState extends State<ListInstruments> {
   List<double> startAvgPrice = [0.0];
   List<String> startCurrencyName = ['0'];
   List<String> startInstrumentTypeName = ['0'];
-  // List<int> accountsId = [];
   String utf8RUB = '\u20BD';
+  String utf8USD = '\u0024';
+  String utf8CHY = '\u00A5';
+  String utf8HKD = '\u0024';
+  String utf8EUR = '\u20AC';
 
   Future<void> getListInstruments() async {
     InstrumentsList instance = InstrumentsList();
     await instance.getInstrumentsList();
-    // print(instance.instrumentNames);
-    // print(instance.totalQuantity);
-    // print(instance.avgPrice);
-    // print(instance.currencyName);
-    // print(instance.instrumentTypeName);
     setState(() {
       startInstrumentNames = instance.instrumentNames;
       startTotalQuantity = instance.totalQuantity;
       startAvgPrice = instance.avgPrice;
       startCurrencyName = instance.currencyName;
       startInstrumentTypeName = instance.instrumentTypeName;
-      // accountsId = instance.accountId;
     });
+  }
+
+  String getCurrencySymbol(String currency) {
+    switch (currency) {
+      case 'RUB':
+        return utf8RUB;
+      case 'USD':
+        return utf8USD;
+      case 'CHY':
+        return utf8CHY;
+      case 'HKD':
+        return utf8HKD;
+      case 'EUR':
+        return utf8EUR;
+      default:
+        return '';
+    }
   }
 
   @override
@@ -57,52 +63,62 @@ class _ListInstrumentsState extends State<ListInstruments> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: startInstrumentNames.length,
           itemBuilder: (context, index) {
+            String currencySymbol = getCurrencySymbol(startCurrencyName[index]);
             return Column(
               children: [
-                // GestureDetector(
-                  ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        startInstrumentNames[index],
+                        style: TextStyle(
+                          color: ColorsClass.getFrontForNotPressedButton(),
+                          fontSize: 22,
+                        ),
+                      ),
+                      if (startInstrumentTypeName[index] == 'Валюта')
                         Text(
-                          startInstrumentNames[index],
+                          '${startTotalQuantity[index]} $currencySymbol',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
                             fontSize: 22,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ),
+                        )
+                      else
                         Text(
-                          '${startAvgPrice[index]} $utf8RUB', // Стоимость
+                          '${startAvgPrice[index]} $currencySymbol',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    ),
-                    subtitle: Text(
-                      '${startTotalQuantity[index]} шт',
-                      style: TextStyle(
-                        color: ColorsClass.getFrontForNotPressedButton(),
-                      ),
-                    ),
-                    onTap: () {
-                      // GlobalAccountId(accountsId[index]);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => addInstrumentScreen(toggleView: widget.toggleView)),
-                      );
-                    },
+                    ],
                   ),
-                // ),
+                  subtitle: startInstrumentTypeName[index] == 'Валюта'
+                      ? null
+                      : Text(
+                    '${startTotalQuantity[index]} шт',
+                    style: TextStyle(
+                      color: ColorsClass.getFrontForNotPressedButton(),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => addInstrumentScreen(toggleView: widget.toggleView)),
+                    );
+                  },
+                ),
                 SizedBox(
                   height: 1,
                   child: Divider(
-                    color: ColorsClass.color_for_devider, // цвет черты
-                    thickness: 1, // толщина черты
-                    indent: 16, // отступ слева
-                    endIndent: 16, // отступ справа
+                    color: ColorsClass.color_for_devider,
+                    thickness: 1,
+                    indent: 16,
+                    endIndent: 16,
                   ),
                 ),
               ],
