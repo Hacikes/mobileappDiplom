@@ -42,15 +42,21 @@ class TypeOfInstrumentsPercent {
           .toList();
       //print(shareList);
 
-      for (Map<String, dynamic> instruments in shareList) {
-        instruments.forEach((key, value) {
-          keys.add(key);
-          if (value is double) {
-            values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
-          } else if (value is int) {
-            values.add(value.toDouble());
-          }
-        });
+      if (shareList.isEmpty) {
+        keys = ['XXX'];
+        values = [100.0];
+      } else {
+        for (Map<String, dynamic> instruments in shareList) {
+          instruments.forEach((key, value) {
+            keys.add(key);
+            if (value is double) {
+              values.add(double.parse(value.toStringAsFixed(
+                  2))); // Ограничение до трех знаков после запятой
+            } else if (value is int) {
+              values.add(value.toDouble());
+            }
+          });
+        }
       }
       // print('Ключи: ${keys}');
       // print('Значения: ${values}');

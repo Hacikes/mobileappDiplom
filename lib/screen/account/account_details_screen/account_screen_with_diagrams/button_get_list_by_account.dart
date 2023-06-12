@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_app_diplom/screen/instrument/list_of_instruments/list_of_instruments.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/instruments_on_account_screen.dart';
 
 
 class button_get_list_by_account extends StatefulWidget {
@@ -26,7 +26,7 @@ class _button_get_list_by_accountState extends State<button_get_list_by_account>
             padding: EdgeInsets.only(bottom: 20),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ListOfInstruments(toggleView: widget.toggleView, AccountIdForDetails: widget.AccountIdForDetails, AccountNameForDetails: widget.AccountNameForDetails, BrokerNameForDetails: widget.BrokerNameForDetails)
                   ),

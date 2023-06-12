@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts_list.dart';
-import 'package:mobile_app_diplom/screen/instrument/list_of_instruments/button_move_to_diagram_screen_by_account.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_move_to_diagram_screen_by_account.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_move_to_instrument_details.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/free_cash_by_account.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/list_of_instruments.dart';
 
 
 class ListOfInstruments extends StatefulWidget {
@@ -56,11 +59,14 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
               ),
             ),
             button_move_to_diagram_screen_by_account(toggleView: widget.toggleView, AccountIdForDetails: widget.AccountIdForDetails, AccountNameForDetails: widget.AccountNameForDetails, BrokerNameForDetails: widget.BrokerNameForDetails),
-            AccountsList(toggleView: widget.toggleView),
-            SizedBox(height: 20,),
+            ListInstruments(toggleView: widget.toggleView),
+
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+              child: button_move_to_instrument_details_screen_by_account(toggleView: widget.toggleView,),
             ),
+            SizedBox(height: 20,),
+            free_cash_panel(toggleView: widget.toggleView,),
           ],
         ),
         // drawer: DrawerFull(context: this.context),

@@ -38,16 +38,21 @@ class ShareOfCurrencyInAllInstrumentsByAccount {
       List<dynamic> percentCurrencyOnAllInstruments = decodedJson['percent_currency_on_all_instruments'];
       //print(percentCurrencyOnAllInstruments);
 
-      for (Map<String, dynamic> currency in percentCurrencyOnAllInstruments) {
-        currency.forEach((key, value) {
-          keys.add(key);
-          //values.add(value);
-          if (value is double) {
-            values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
-          } else if (value is int) {
-            values.add(value.toDouble());
-          }
-        });
+
+      if (percentCurrencyOnAllInstruments.isEmpty) {
+        keys = ['XXX'];
+        values = [100.0];
+      } else {
+        for (Map<String, dynamic> currency in percentCurrencyOnAllInstruments) {
+          currency.forEach((key, value) {
+            keys.add(key);
+            if (value is double) {
+              values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
+            } else if (value is int) {
+              values.add(value.toDouble());
+            }
+          });
+        }
       }
 
       //print(keys); // ['RUB', 'USD']

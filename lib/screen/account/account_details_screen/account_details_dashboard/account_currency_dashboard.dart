@@ -4,8 +4,6 @@ import 'package:mobile_app_diplom/mock/mock_dashboard.dart';
 import 'package:mobile_app_diplom/mock/mock_total_value_in_rub.dart';
 import 'package:mobile_app_diplom/services/services_for_account/services_for_account_details_screen/get_percent_currency_on_all_instruments_for_account.dart';
 import 'package:mobile_app_diplom/services/services_for_account/services_for_account_details_screen/get_total_volume_currency_in_RUB_for_account.dart';
-import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_percent_currency_on_all_instruments.dart';
-import 'package:mobile_app_diplom/services/services_for_home_screen/services_for_home_currency_screen/get_total_volume_currency_in_RUB.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 
 class account_details_currency_dashboard extends StatefulWidget {
@@ -34,16 +32,8 @@ class _account_details_currency_dashboardState extends State<account_details_cur
   Future<void> setupShareOfCurrencyInAllInstrumentsByAccount() async {
     ShareOfCurrencyInAllInstrumentsByAccount instance = ShareOfCurrencyInAllInstrumentsByAccount();
     await instance.getShareOfCurrencyInAllInstrumentsByAccount();
-    //print(instance.values);
-    // List<Color> colors = [
-    //   Colors.green,
-    //   Colors.amber,
-    //   Colors.blue,
-    //   Colors.yellow,
-    //   Colors.red,
-    //   Colors.deepPurple
-    //   // Добавьте другие цвета, если необходимо
-    // ];
+    // print(instance.values);
+
      setState(() {
        StartPie = instance.values;
        pieChartSectionDatas = generatePieChartSectionData(ColorsClass.getColors());

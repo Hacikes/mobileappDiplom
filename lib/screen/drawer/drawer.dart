@@ -36,12 +36,12 @@ class _DrawerFullState extends State<DrawerFull> {
     });
   }
 
-  Future<void> setupLogOut() async {
-    LogOutService instance = LogOutService();
-    await instance.logout();
-    setState(() {
-    });
-  }
+  // Future<void> setupLogOut() async {
+  //   LogOutService instance = LogOutService();
+  //   await instance.logout();
+  //   setState(() {
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +112,7 @@ class _DrawerFullState extends State<DrawerFull> {
               ),
               onTap: () {
                 // Обработчик нажатия на пункт меню
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Accounts(toggleView: toggleView)),
                 );
@@ -235,7 +235,7 @@ class _DrawerFullState extends State<DrawerFull> {
   void initState(){
     super.initState();
     setupUserInfo();
-    setupLogOut();
+    // setupLogOut();
   }
 }
 

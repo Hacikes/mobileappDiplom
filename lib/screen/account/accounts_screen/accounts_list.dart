@@ -45,147 +45,150 @@ class _AccountsListState extends State<AccountsList> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: accountsId.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              GestureDetector(
-                onLongPress: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return Dialog(
-                        backgroundColor: ColorsClass.getBackgroundForBodyDrawer(),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Container(
-                          width: 100,
-                          height: 150,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                startAccountNames[index],
-                                style: TextStyle(
-                                  color: ColorsClass.getFrontForNotPressedButton(),
-                                  fontSize: 16,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              SizedBox(
-                                width: 150,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => EditAccount(toggleView: widget.toggleView, AccountName: startAccountNames[index], brokerName: startBrokerNames[index])),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        minimumSize: Size(double.infinity, 40),
-                                      ),
-                                      child: Text('Редактировать'),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () async {
-                                        final statusCode = await DeleteAccountService().deleteAccount(accountsId[index]);
-                                        switch (statusCode) {
-                                        case 200:
-                                        // Удаление счёта прошло успешно, возврат списока счетов
-                                          getListAccounts();
-                                          Navigator.pop(context);
-                                          break;
-                                        default:
-                                        // Обработка других статусов ответа
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            SnackBar(
-                                              content: Text('Упс... Что-то пошло не так ...'),
-                                              duration: Duration(seconds: 3),
-                                            ),
-                                          );
-                                          Navigator.pop(context);
-                                          break;
-                                      }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        minimumSize: Size(double.infinity, 40),
-                                      ),
-                                      child: Text('Удалить'),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.7,
+      child: SingleChildScrollView(
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: accountsId.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                GestureDetector(
+                  onLongPress: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                          backgroundColor: ColorsClass.getBackgroundForBodyDrawer(),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        startAccountNames[index],
-                        style: TextStyle(
-                          color: ColorsClass.getFrontForNotPressedButton(),
-                          fontSize: 22,
-                        ),
-                      ),
-                      Text(
-                        '${startSumForAccount[index]} $utf8RUB', // Стоимость
-                        style: TextStyle(
-                          color: ColorsClass.getFrontForNotPressedButton(),
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  subtitle: Text(
-                    startBrokerNames[index],
-                    style: TextStyle(
-                      color: ColorsClass.getFrontForNotPressedButton(),
-                    ),
-                  ),
-                  onTap: () {
-                    setGlobalAccountId(accountsId[index]);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AccountDetailsCurrency(toggleView: widget.toggleView, AccountIdForDetails: accountsId[index], AccountNameForDetails: startAccountNames[index], BrokerNameForDetails: startBrokerNames[index])),
+                          child: Container(
+                            width: 100,
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  startAccountNames[index],
+                                  style: TextStyle(
+                                    color: ColorsClass.getFrontForNotPressedButton(),
+                                    fontSize: 16,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 150,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => EditAccount(toggleView: widget.toggleView, AccountName: startAccountNames[index], brokerName: startBrokerNames[index])),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          minimumSize: Size(double.infinity, 40),
+                                        ),
+                                        child: Text('Редактировать'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () async {
+                                          final statusCode = await DeleteAccountService().deleteAccount(accountsId[index]);
+                                          switch (statusCode) {
+                                          case 200:
+                                          // Удаление счёта прошло успешно, возврат списока счетов
+                                            getListAccounts();
+                                            Navigator.pop(context);
+                                            break;
+                                          default:
+                                          // Обработка других статусов ответа
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Упс... Что-то пошло не так ...'),
+                                                duration: Duration(seconds: 3),
+                                              ),
+                                            );
+                                            Navigator.pop(context);
+                                            break;
+                                        }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: ColorsClass.getBackgroundForNotPressedButton(),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          minimumSize: Size(double.infinity, 40),
+                                        ),
+                                        child: Text('Удалить'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
+                  child: ListTile(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          startAccountNames[index],
+                          style: TextStyle(
+                            color: ColorsClass.getFrontForNotPressedButton(),
+                            fontSize: 22,
+                          ),
+                        ),
+                        Text(
+                          '${startSumForAccount[index]} $utf8RUB', // Стоимость
+                          style: TextStyle(
+                            color: ColorsClass.getFrontForNotPressedButton(),
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    subtitle: Text(
+                      startBrokerNames[index],
+                      style: TextStyle(
+                        color: ColorsClass.getFrontForNotPressedButton(),
+                      ),
+                    ),
+                    onTap: () {
+                      setGlobalAccountId(accountsId[index]);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AccountDetailsCurrency(toggleView: widget.toggleView, AccountIdForDetails: accountsId[index], AccountNameForDetails: startAccountNames[index], BrokerNameForDetails: startBrokerNames[index])),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 1,
-                child: Divider(
-                  color: ColorsClass.color_for_devider, // цвет черты
-                  thickness: 1, // толщина черты
-                  indent: 16, // отступ слева
-                  endIndent: 16, // отступ справа
+                SizedBox(
+                  height: 1,
+                  child: Divider(
+                    color: ColorsClass.color_for_devider, // цвет черты
+                    thickness: 1, // толщина черты
+                    indent: 16, // отступ слева
+                    endIndent: 16, // отступ справа
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

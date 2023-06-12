@@ -35,17 +35,23 @@ class TypeOfCurrencyInstrumentsPercent {
       // print(decodedJson);
 
       List<dynamic> percentCurrencyOnAllInstruments = decodedJson['percent_by_instrument_type'];
-      print('percent_by_instrument_type: ${percentCurrencyOnAllInstruments}');
+      // print('percent_by_instrument_type: ${percentCurrencyOnAllInstruments}');
 
-      for (Map<String, dynamic> assets in percentCurrencyOnAllInstruments) {
-        assets.forEach((key, value) {
-          keys.add(key);
-          if (value is double) {
-            values.add(double.parse(value.toStringAsFixed(2))); // Ограничение до трех знаков после запятой
-          } else if (value is int) {
-            values.add(value.toDouble());
-          }
-        });
+      if (percentCurrencyOnAllInstruments.isEmpty) {
+        keys = ['XXX'];
+        values = [100.0];
+      } else {
+        for (Map<String, dynamic> assets in percentCurrencyOnAllInstruments) {
+          assets.forEach((key, value) {
+            keys.add(key);
+            if (value is double) {
+              values.add(double.parse(value.toStringAsFixed(
+                  2))); // Ограничение до трех знаков после запятой
+            } else if (value is int) {
+              values.add(value.toDouble());
+            }
+          });
+        }
       }
       // print('Ключи: ${keys}');
       // print('Значения: ${values}');

@@ -20,13 +20,13 @@ class LogOutService {
       // Обработка успешного ответа
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
-      print('Успешный ответ при логауте: ${response.statusCode}');
+      print('Выдвижная панель -- Успешный ответ при логауте: ${response.statusCode}');
 
 
       //print(cookieValue);
     } else {
       // Обработка ошибки
-      print('Ошибка пответ при логауте: ${response.statusCode}');
+      print('Выдвижная панель -- Ошибка пответ при логауте: ${response.statusCode}');
     }
     return response.statusCode;
   }
