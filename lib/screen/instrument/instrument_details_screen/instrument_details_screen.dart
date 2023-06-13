@@ -29,7 +29,6 @@ class instrumentDetailsScreen extends StatefulWidget {
 }
 
 class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
-
   double startPercentForUser = 0.0;
   double startPercentForAccount = 0.0;
 
@@ -79,9 +78,7 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
     await instance.getInstrumentsPercentForAccount(widget.instrumentNames);
     setState(() {
       startPercentForUser = instance.values[0];
-      // print(startPercentForUser);
       startPercentForAccount = instance.values1[0];
-      // print(startPercentForAccount);
     });
   }
 
@@ -114,14 +111,27 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 12.0, 10.0, 12.0),
-              child: Text(
-                '$displayValue ${isCurrency ? '$currencySymbol' : '$currencySymbol'}',
-                style: TextStyle(
-                  fontSize: 36.0,
-                  color: ColorsClass.getFrontForHeaderText(),
-                  // fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.left,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$displayValue ${isCurrency ? '$currencySymbol' : '$currencySymbol'}',
+                    style: TextStyle(
+                      fontSize: 36.0,
+                      color: ColorsClass.getFrontForHeaderText(),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  if (!isCurrency) Text(
+                    'Средневзвешенное значение',
+                    style: TextStyle(
+                      fontSize: 12.0,
+                      color: ColorsClass.getFrontForHeaderText(),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -133,7 +143,7 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                 endIndent: 16,
               ),
             ),
-            if (!isCurrency) ...[
+            if (!isCurrency && widget.instrumentNames != 'RUB') ...[
               Padding(
                 padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
                 child: Row(
@@ -144,7 +154,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                       style: TextStyle(
                         fontSize: 24.0,
                         color: ColorsClass.getFrontForHeaderText(),
-                        // fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -153,7 +162,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                       style: TextStyle(
                         fontSize: 24.0,
                         color: ColorsClass.getFrontForHeaderText(),
-                        // fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -170,7 +178,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                       style: TextStyle(
                         fontSize: 24.0,
                         color: ColorsClass.getFrontForHeaderText(),
-                        // fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -179,7 +186,32 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                       style: TextStyle(
                         fontSize: 24.0,
                         color: ColorsClass.getFrontForHeaderText(),
-                        // fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            if (isCurrency && widget.instrumentNames != 'RUB') ...[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Средневзвешенное\nзначение',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        color: ColorsClass.getFrontForHeaderText(),
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      '${widget.avgPrice} ${utf8RUB}',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        color: ColorsClass.getFrontForHeaderText(),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -197,7 +229,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                     style: TextStyle(
                       fontSize: 24.0,
                       color: ColorsClass.getFrontForHeaderText(),
-                      // fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -206,7 +237,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                     style: TextStyle(
                       fontSize: 24.0,
                       color: ColorsClass.getFrontForHeaderText(),
-                      // fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -224,7 +254,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                     style: TextStyle(
                       fontSize: 24.0,
                       color: ColorsClass.getFrontForHeaderText(),
-                      // fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -233,7 +262,6 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                     style: TextStyle(
                       fontSize: 24.0,
                       color: ColorsClass.getFrontForHeaderText(),
-                      // fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.left,
                   ),
