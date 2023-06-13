@@ -212,6 +212,10 @@ class _DrawerFullState extends State<DrawerFull> {
                                   duration: Duration(seconds: 3),
                                 ),
                               );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView)),
+                              );
                             }
                           },
                           child: Text(

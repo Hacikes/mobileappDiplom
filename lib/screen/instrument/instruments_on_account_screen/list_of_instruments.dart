@@ -45,7 +45,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
   // Функция записывающая instrument_id в глобальную переменную
   void setGlobalInstrumentId(int value) {
     GlobalInstrumentId = value;
-    print(GlobalInstrumentId);
+    // print(GlobalInstrumentId);
   }
 
   String getCurrencySymbol(String currency) {
@@ -121,7 +121,17 @@ class _ListInstrumentsState extends State<ListInstruments> {
                     setGlobalInstrumentId(startInstrumentId[index]);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => instrumentDetailsScreen(toggleView: widget.toggleView)),
+                      // MaterialPageRoute(builder: (context) => instrumentDetailsScreen(toggleView: widget.toggleView)),
+                      MaterialPageRoute(builder: (context) => instrumentDetailsScreen(
+                          toggleView: widget.toggleView,
+                          instrumentId: startInstrumentId[index],
+                          instrumentNames: startInstrumentNames[index],
+                          totalQuantity: startTotalQuantity[index],
+                          avgPrice: startAvgPrice[index],
+                          currencyName: startCurrencyName[index],
+                          instrumentTypeName: startInstrumentTypeName[index]
+                      )
+                      ),
                     );
                   },
                 ),

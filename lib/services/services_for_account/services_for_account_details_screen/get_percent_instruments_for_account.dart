@@ -41,7 +41,7 @@ class TypeOfInstrumentsPercentByAccount {
       List<Map<String, dynamic>> shareList = decodedJson['percent_for_instrument_name_for_account']
           .map<Map<String, dynamic>>((item) => <String, dynamic>{item.keys.first: item[item.keys.first]['share']})
           .toList();
-      //print(shareList);
+      print(shareList);
 
       if (shareList.isEmpty) {
         keys = ['XXX'];
