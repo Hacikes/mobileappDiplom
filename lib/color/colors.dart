@@ -23,6 +23,8 @@ class ColorsClass {
   static Color background_for_pressed_button = Colors.grey;
   static Color background_for_header_drawer = Colors.grey[800]!;
   static Color background_for_body_drawer = Colors.grey[900]!;
+  static Color background_for_buy_button = Colors.green;
+  static Color background_for_sell_button = Colors.red;
 
 
   // fronts
@@ -71,6 +73,14 @@ class ColorsClass {
     // Для фона тела выдвижной панели слева
     static Color getBackgroundForBodyDrawer(){
       return background_for_body_drawer;
+    }
+    // Для фона кнопки продажи
+    static Color getBackgroundForBuyButton(){
+      return background_for_buy_button;
+    }
+    // Для фона кнопки продажи
+    static Color getBackgroundForSellButton(){
+      return background_for_sell_button;
     }
 
   // fronts
