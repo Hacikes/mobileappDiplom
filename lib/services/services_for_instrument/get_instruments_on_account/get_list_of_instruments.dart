@@ -8,7 +8,9 @@ class InstrumentsList {
   List<String> instrumentNames = [];
   List<int> totalQuantity = [];
   List<double> avgPrice = [];
+  List<int> currencyId = [];
   List<String> currencyName = [];
+  List<int> instrumentTypeId = [];
   List<String> instrumentTypeName = [];
 
   InstrumentsList();
@@ -36,7 +38,9 @@ class InstrumentsList {
           instrumentNames.add(value['instrument_name']);
           totalQuantity.add(value['total_quantity']);
           avgPrice.add(value['avg_price'].toDouble());
+          currencyId.add(value['currency_id']);
           currencyName.add(value['currency_name']);
+          instrumentTypeId.add(value['instrument_type_id']);
           instrumentTypeName.add(value['instrument_type_name']);
         });
       }

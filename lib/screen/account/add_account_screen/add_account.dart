@@ -1,14 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts.dart';
-import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
 import 'package:mobile_app_diplom/services/services_for_account/services_for_accounts_srceen/add_account.dart';
-import 'package:mobile_app_diplom/services/services_for_auth/sign_up.dart';
+
 
 class AddAccount extends StatefulWidget {
   const AddAccount({Key? key, required this.toggleView}) : super(key: key);

@@ -13,7 +13,9 @@ class instrumentDetailsScreen extends StatefulWidget {
     required this.instrumentNames,
     required this.totalQuantity,
     required this.avgPrice,
+    required this.currencyId,
     required this.currencyName,
+    required this.instrumentTypeId,
     required this.instrumentTypeName,
   }) : super(key: key);
 
@@ -21,7 +23,9 @@ class instrumentDetailsScreen extends StatefulWidget {
   final String instrumentNames;
   final int totalQuantity;
   final double avgPrice;
+  final int currencyId;
   final String currencyName;
+  final int instrumentTypeId;
   final String instrumentTypeName;
 
   final Function toggleView;
@@ -50,7 +54,7 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            instrumentDetails(toggleView: widget.toggleView,
+            InstrumentDetails(toggleView: widget.toggleView,
                   instrumentId: widget.instrumentId,
                   instrumentNames: widget.instrumentNames,
                   totalQuantity: widget.totalQuantity,
@@ -69,7 +73,9 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                         InstrumentName: widget.instrumentNames,
                         TotalQuantity: widget.totalQuantity,
                         AvgPrice: widget.avgPrice,
+                        currencyId: widget.currencyId,
                         CurrencyName: widget.currencyName,
+                        instrumentTypeId: widget.instrumentTypeId,
                         InstrumentTypeName: widget.instrumentTypeName
                     ),
                     button_sell_instrument(toggleView: widget.toggleView,
@@ -77,7 +83,9 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                         InstrumentName: widget.instrumentNames,
                         TotalQuantity: widget.totalQuantity,
                         AvgPrice: widget.avgPrice,
+                        currencyId: widget.currencyId,
                         CurrencyName: widget.currencyName,
+                        instrumentTypeId: widget.instrumentTypeId,
                         InstrumentTypeName: widget.instrumentTypeName
                     ),
                   ],

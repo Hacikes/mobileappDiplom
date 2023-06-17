@@ -119,4 +119,3 @@ class InstrumentsPercentForUserAndAccount {
     // return totalSum;
   }
 }
-

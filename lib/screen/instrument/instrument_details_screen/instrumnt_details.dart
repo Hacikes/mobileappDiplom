@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/services/services_for_instrument/get_instrument_percent_for_account_and_user/get_instrument_percent_for_account_and_user.dart';
 
-class instrumentDetails extends StatefulWidget {
-  const instrumentDetails({
+class InstrumentDetails extends StatefulWidget {
+  const InstrumentDetails({
     Key? key,
     required this.toggleView,
     required this.instrumentId,
@@ -24,10 +24,10 @@ class instrumentDetails extends StatefulWidget {
   final Function toggleView;
 
   @override
-  State<instrumentDetails> createState() => _instrumentDetailsState();
+  State<InstrumentDetails> createState() => _InstrumentDetailsState();
 }
 
-class _instrumentDetailsState extends State<instrumentDetails> {
+class _InstrumentDetailsState extends State<InstrumentDetails> {
   double startPercentForUser = 0.0;
   double startPercentForAccount = 0.0;
 
@@ -81,6 +81,14 @@ class _instrumentDetailsState extends State<instrumentDetails> {
     });
   }
 
+  String formatValue(double value) {
+    if (value == 0 || value >= 10) {
+      return value.toStringAsFixed(2);
+    } else {
+      return value.toStringAsFixed(5);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String currencySymbol = getCurrencySymbol(widget.currencyName);
@@ -90,173 +98,173 @@ class _instrumentDetailsState extends State<instrumentDetails> {
     bool isCurrency = widget.instrumentTypeName == 'Валюта';
 
     if (isCurrency) {
-      displayValue = widget.totalQuantity;
+      displayValue = widget.totalQuantity.toDouble();
     }
     return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 10.0, 12.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '$displayValue ${isCurrency ? '$currencySymbol' : '$currencySymbol'}',
-                    style: TextStyle(
-                      fontSize: 36.0,
-                      color: ColorsClass.getFrontForHeaderText(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  if (!isCurrency) Text(
-                    'Средневзвешенное значение',
-                    style: TextStyle(
-                      fontSize: 12.0,
-                      color: ColorsClass.getFrontForHeaderText(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 1,
-              child: Divider(
-                color: ColorsClass.color_for_devider,
-                thickness: 1,
-                indent: 16,
-                endIndent: 16,
-              ),
-            ),
-            if (!isCurrency && widget.instrumentNames != 'RUB') ...[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Страна',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    Text(
-                      countryName,
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 10.0, 12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${formatValue(displayValue)} ${isCurrency ? '$currencySymbol' : '$currencySymbol'}',
+                style: TextStyle(
+                  fontSize: 36.0,
+                  color: ColorsClass.getFrontForHeaderText(),
                 ),
+                textAlign: TextAlign.left,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Количество',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    Text(
-                      '${widget.totalQuantity} шт',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+              if (!isCurrency) Text(
+                'Средневзвешенное значение',
+                style: TextStyle(
+                  fontSize: 12.0,
+                  color: ColorsClass.getFrontForHeaderText(),
                 ),
+                textAlign: TextAlign.left,
               ),
             ],
-            if (isCurrency && widget.instrumentNames != 'RUB') ...[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Средневзвешенное\nзначение',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    Text(
-                      '${widget.avgPrice} ${utf8RUB}',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ],
+          ),
+        ),
+        SizedBox(
+          height: 1,
+          child: Divider(
+            color: ColorsClass.color_for_devider,
+            thickness: 1,
+            indent: 16,
+            endIndent: 16,
+          ),
+        ),
+        if (!isCurrency && widget.instrumentNames != 'RUB') ...[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Страна',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
                 ),
+                Text(
+                  countryName,
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Количество',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                  '${widget.totalQuantity} шт',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+          ),
+        ],
+        if (isCurrency && widget.instrumentNames != 'RUB') ...[
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Средневзвешенное\nзначение',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                  '${formatValue(widget.avgPrice)} ${utf8RUB}',
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+          ),
+        ],
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Процент от счёта',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: ColorsClass.getFrontForHeaderText(),
+                ),
+                textAlign: TextAlign.left,
+              ),
+              Text(
+                '${formatValue(startPercentForAccount)} %',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: ColorsClass.getFrontForHeaderText(),
+                ),
+                textAlign: TextAlign.left,
               ),
             ],
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Процент от счёта',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      color: ColorsClass.getFrontForHeaderText(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    '${startPercentForAccount} %',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      color: ColorsClass.getFrontForHeaderText(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Процент от \n'
+                    'всех счетов',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: ColorsClass.getFrontForHeaderText(),
+                ),
+                textAlign: TextAlign.left,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 12.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Процент от \n'
-                        'всех счетов',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      color: ColorsClass.getFrontForHeaderText(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    '${startPercentForUser} %',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      color: ColorsClass.getFrontForHeaderText(),
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
+              Text(
+                '${formatValue(startPercentForUser)} %',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: ColorsClass.getFrontForHeaderText(),
+                ),
+                textAlign: TextAlign.left,
               ),
-            ),
-          ],
-        );
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   @override

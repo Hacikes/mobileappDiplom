@@ -6,7 +6,6 @@ import 'package:mobile_app_diplom/services/services_for_instrument/get_instrumen
 
 int? GlobalInstrumentId;
 
-
 class ListInstruments extends StatefulWidget {
   const ListInstruments({Key? key, required this.toggleView}) : super(key: key);
 
@@ -21,7 +20,9 @@ class _ListInstrumentsState extends State<ListInstruments> {
   List<String> startInstrumentNames = ['0'];
   List<int> startTotalQuantity = [0];
   List<double> startAvgPrice = [0.0];
+  List<int> startCurrencyid = [0];
   List<String> startCurrencyName = ['0'];
+  List<int> startInstrumentTypeId = [0];
   List<String> startInstrumentTypeName = ['0'];
   String utf8RUB = '\u20BD';
   String utf8USD = '\u0024';
@@ -37,7 +38,10 @@ class _ListInstrumentsState extends State<ListInstruments> {
       startInstrumentNames = instance.instrumentNames;
       startTotalQuantity = instance.totalQuantity;
       startAvgPrice = instance.avgPrice;
+      startCurrencyid = instance.currencyId;
+      startInstrumentTypeId = instance.instrumentTypeId;
       startCurrencyName = instance.currencyName;
+
       startInstrumentTypeName = instance.instrumentTypeName;
     });
   }
@@ -65,6 +69,14 @@ class _ListInstrumentsState extends State<ListInstruments> {
     }
   }
 
+  String formatAvgPrice(double avgPrice) {
+    if (avgPrice.toStringAsFixed(2).startsWith('0.')) {
+      return avgPrice.toStringAsFixed(5);
+    } else {
+      return avgPrice.toStringAsFixed(2);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -76,6 +88,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
           itemCount: startInstrumentId.length,
           itemBuilder: (context, index) {
             String currencySymbol = getCurrencySymbol(startCurrencyName[index]);
+            String formattedAvgPrice = formatAvgPrice(startAvgPrice[index]);
             return Column(
               children: [
                 ListTile(
@@ -100,7 +113,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
                         )
                       else
                         Text(
-                          '${startAvgPrice[index]} $currencySymbol',
+                          '$formattedAvgPrice $currencySymbol',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
                             fontSize: 22,
@@ -121,17 +134,17 @@ class _ListInstrumentsState extends State<ListInstruments> {
                     setGlobalInstrumentId(startInstrumentId[index]);
                     Navigator.push(
                       context,
-                      // MaterialPageRoute(builder: (context) => instrumentDetailsScreen(toggleView: widget.toggleView)),
                       MaterialPageRoute(builder: (context) => instrumentDetailsScreen(
                           toggleView: widget.toggleView,
                           instrumentId: startInstrumentId[index],
                           instrumentNames: startInstrumentNames[index],
                           totalQuantity: startTotalQuantity[index],
                           avgPrice: startAvgPrice[index],
+                          currencyId: startCurrencyid[index],
                           currencyName: startCurrencyName[index],
+                          instrumentTypeId: startInstrumentTypeId[index],
                           instrumentTypeName: startInstrumentTypeName[index]
-                      )
-                      ),
+                      )),
                     );
                   },
                 ),
