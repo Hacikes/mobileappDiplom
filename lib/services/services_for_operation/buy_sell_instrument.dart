@@ -115,10 +115,10 @@ class BuySellInstrumentService {
       // print('Успешный ответ: ${url}');
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
-      print('Успешный ответ при покупке инструмента: ${response.statusCode}');
+      print('Успешный ответ при пополнении счёта: ${response.statusCode}');
     } else {
       // Обработка ошибки
-      print('Ошибка при покупке инструмента: ${response.statusCode}');
+      print('Ошибка при пополнении счёта: ${response.statusCode}');
       // print('Успешный ответ: ${url}');
       // print('Успешный ответ: ${headers}');
       // print('Успешный ответ: ${body}');
@@ -158,10 +158,10 @@ class BuySellInstrumentService {
       // print('Успешный ответ: ${url}');
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
-      print('Успешный ответ при покупке инструмента: ${response.statusCode}');
+      print('Успешный ответ при выводе со счёта: ${response.statusCode}');
     } else {
       // Обработка ошибки
-      print('Ошибка при покупке инструмента: ${response.statusCode}');
+      print('Ошибка при выводе со счёта: ${response.statusCode}');
       // print('Успешный ответ: ${url}');
       // print('Успешный ответ: ${headers}');
       // print('Успешный ответ: ${body}');

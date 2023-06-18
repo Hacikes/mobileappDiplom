@@ -198,7 +198,7 @@ class _BuyInstrumentState extends State<BuyInstrument> {
                     ),
                     SizedBox(height: 10.0),
                     Text(
-                      'Стоимость: ${getTotalCost()} ${widget.getCurrencySymbol(widget.CurrencyName)}',
+                      'Стоимость: ${getTotalCost().toStringAsFixed(3)} ${widget.getCurrencySymbol(widget.CurrencyName)}',
                       style: TextStyle(
                         fontSize: 24.0,
                         color: ColorsClass.getFrontForHeaderText(),

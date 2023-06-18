@@ -1,15 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
-import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts_list.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_move_to_diagram_screen_by_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_top_up_and_withdraw_from_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/free_cash_by_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/list_of_instruments.dart';
-
+import 'package:mobile_app_diplom/screen/instrument/search_instrument/search_instrument_screen.dart';
 
 class ListOfInstruments extends StatefulWidget {
-  const ListOfInstruments({Key? key, required this.toggleView, required this.AccountIdForDetails, required this.AccountNameForDetails, required this.BrokerNameForDetails}) : super(key: key);
+  const ListOfInstruments({
+    Key? key,
+    required this.toggleView,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails,
+  }) : super(key: key);
+
   final int AccountIdForDetails;
   final String AccountNameForDetails;
   final String BrokerNameForDetails;
@@ -21,7 +27,6 @@ class ListOfInstruments extends StatefulWidget {
 }
 
 class _ListOfInstrumentsState extends State<ListOfInstruments> {
-
   List<String> StartInstrumentNames = [];
   List<int> StartTotalQuantity = [];
   List<double> StartAvgPrice = [];
@@ -37,12 +42,19 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
         backgroundColor: ColorsClass.getBackgroundForSrceen(),
         appBar: AppBar(
           title: Text(widget.BrokerNameForDetails),
-          backgroundColor: ColorsClass.getBackgroundForAppbar(),
+          backgroundColor: ColorsClass.getBackgroundForSrceen(), // Измените цвет AppBar здесь
           elevation: 0.0,
           automaticallyImplyLeading: true,
-          actions: const <Widget>[],
+          // Виджет поиска
+          actions: [
+            SearchScreen(toggleView: widget.toggleView,
+              AccountIdForDetails: widget.AccountIdForDetails,
+              AccountNameForDetails: widget.AccountNameForDetails,
+              BrokerNameForDetails: widget.BrokerNameForDetails,
+            ),
+          ],
         ),
-        body: SingleChildScrollView( // Wrap the Column with SingleChildScrollView
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,3 +95,5 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
     );
   }
 }
+
+

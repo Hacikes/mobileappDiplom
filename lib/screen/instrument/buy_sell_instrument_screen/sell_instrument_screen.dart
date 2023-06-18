@@ -199,7 +199,7 @@ class _SellInstrumentState extends State<SellInstrument> {
                     ),
                     SizedBox(height: 10.0),
                     Text(
-                      'Стоимость: ${getTotalCost()} $currencySymbol',
+                      'Стоимость: ${getTotalCost().toStringAsFixed(3)} $currencySymbol',
                       style: TextStyle(
                         fontSize: 24.0,
                         color: ColorsClass.getFrontForHeaderText(),

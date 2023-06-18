@@ -52,7 +52,7 @@ class _button_buy_instrumentState extends State<button_buy_instrument> {
                 InstrumentTypeName: widget.InstrumentTypeName
               )
             ),
-            );
+          );
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: ColorsClass.getBackgroundForBuyButton(),
