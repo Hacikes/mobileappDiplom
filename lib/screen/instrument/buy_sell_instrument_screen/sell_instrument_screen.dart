@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/instrument/buy_sell_instrument_screen/free_cash_in_currency.dart';
 import 'package:mobile_app_diplom/screen/instrument/instrument_details_screen/instrument_details_screen.dart';
-import 'package:mobile_app_diplom/services/services_for_operation/buy_instrument.dart';
+import 'package:mobile_app_diplom/services/services_for_operation/buy_sell_instrument.dart';
 
 class SellInstrument extends StatefulWidget {
   SellInstrument({
@@ -210,7 +210,7 @@ class _SellInstrumentState extends State<SellInstrument> {
                       'Количество: ${getTotalQuantity()} шт',
                       style: TextStyle(
                         fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
+                        color: getTotalQuantity() < 0 ? Colors.red : ColorsClass.getFrontForHeaderText(),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -258,7 +258,8 @@ class _SellInstrumentState extends State<SellInstrument> {
                             default:
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Упс... Что-то пошло не так ...'),
+                                  content: Text(
+                                      'Упс... Что-то пошло не так ...\nВозможно вы пытаетесь продать больше,\nчем у вас есть'),
                                   duration: Duration(seconds: 3),
                                 ),
                               );

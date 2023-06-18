@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/instrument/buy_sell_instrument_screen/free_cash_in_currency.dart';
 import 'package:mobile_app_diplom/screen/instrument/instrument_details_screen/instrument_details_screen.dart';
-import 'package:mobile_app_diplom/services/services_for_operation/buy_instrument.dart';
+import 'package:mobile_app_diplom/services/services_for_operation/buy_sell_instrument.dart';
 
 class BuyInstrument extends StatefulWidget {
   BuyInstrument({

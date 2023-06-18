@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
-import 'package:mobile_app_diplom/screen/instrument/add_instrument_screen/add_instruments_screen.dart';
+import 'package:mobile_app_diplom/screen/instrument/add_withdraw_RUB_screen/top_up_account_screen.dart';
 import 'package:mobile_app_diplom/screen/instrument/instrument_details_screen/instrument_details_screen.dart';
 import 'package:mobile_app_diplom/services/services_for_instrument/get_instruments_on_account/get_list_of_instruments.dart';
 
@@ -87,6 +87,10 @@ class _ListInstrumentsState extends State<ListInstruments> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: startInstrumentId.length,
           itemBuilder: (context, index) {
+            if (startInstrumentNames[index] == 'RUB') {
+              return SizedBox.shrink();
+            }
+
             String currencySymbol = getCurrencySymbol(startCurrencyName[index]);
             String formattedAvgPrice = formatAvgPrice(startAvgPrice[index]);
             return Column(
@@ -134,7 +138,8 @@ class _ListInstrumentsState extends State<ListInstruments> {
                     setGlobalInstrumentId(startInstrumentId[index]);
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => instrumentDetailsScreen(
+                      MaterialPageRoute(
+                        builder: (context) => instrumentDetailsScreen(
                           toggleView: widget.toggleView,
                           instrumentId: startInstrumentId[index],
                           instrumentNames: startInstrumentNames[index],
@@ -143,8 +148,9 @@ class _ListInstrumentsState extends State<ListInstruments> {
                           currencyId: startCurrencyid[index],
                           currencyName: startCurrencyName[index],
                           instrumentTypeId: startInstrumentTypeId[index],
-                          instrumentTypeName: startInstrumentTypeName[index]
-                      )),
+                          instrumentTypeName: startInstrumentTypeName[index],
+                        ),
+                      ),
                     );
                   },
                 ),

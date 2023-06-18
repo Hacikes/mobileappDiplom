@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts_list.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_move_to_diagram_screen_by_account.dart';
-import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_move_to_instrument_details.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_top_up_and_withdraw_from_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/free_cash_by_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/list_of_instruments.dart';
 
@@ -42,34 +42,43 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
           automaticallyImplyLeading: true,
           actions: const <Widget>[],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 12.0, 10.0, 12.0),
-              child: Text(
-                widget.AccountNameForDetails,
-                style: TextStyle(
-                  fontSize: 36.0,
-                  color: ColorsClass.getFrontForHeaderText(),
-                  // fontWeight: FontWeight.bold,
+        body: SingleChildScrollView( // Wrap the Column with SingleChildScrollView
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 10.0, 12.0),
+                child: Text(
+                  widget.AccountNameForDetails,
+                  style: TextStyle(
+                    fontSize: 36.0,
+                    color: ColorsClass.getFrontForHeaderText(),
+                  ),
+                  textAlign: TextAlign.left,
                 ),
-                textAlign: TextAlign.left,
               ),
-            ),
-            button_move_to_diagram_screen_by_account(toggleView: widget.toggleView, AccountIdForDetails: widget.AccountIdForDetails, AccountNameForDetails: widget.AccountNameForDetails, BrokerNameForDetails: widget.BrokerNameForDetails),
-            ListInstruments(toggleView: widget.toggleView),
-
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
-              child: button_move_to_instrument_details_screen_by_account(toggleView: widget.toggleView,),
-            ),
-            SizedBox(height: 20,),
-            free_cash_panel(toggleView: widget.toggleView,),
-          ],
+              button_move_to_diagram_screen_by_account(
+                toggleView: widget.toggleView,
+                AccountIdForDetails: widget.AccountIdForDetails,
+                AccountNameForDetails: widget.AccountNameForDetails,
+                BrokerNameForDetails: widget.BrokerNameForDetails,
+              ),
+              ListInstruments(toggleView: widget.toggleView),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
+                child: ButtonTopUpAndWithdrawFromAccount(
+                  toggleView: widget.toggleView,
+                  AccountIdForDetails: widget.AccountIdForDetails,
+                  AccountNameForDetails: widget.AccountNameForDetails,
+                  BrokerNameForDetails: widget.BrokerNameForDetails,
+                ),
+              ),
+              SizedBox(height: 20),
+              free_cash_panel(toggleView: widget.toggleView),
+            ],
+          ),
         ),
-        // drawer: DrawerFull(context: this.context),
       ),
     );
   }
