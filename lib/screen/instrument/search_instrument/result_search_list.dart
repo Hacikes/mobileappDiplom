@@ -11,21 +11,25 @@ class ResultSearchList extends StatefulWidget {
   @override
   State<ResultSearchList> createState() => _ResultSearchListState();
 }
-//
+
 class _ResultSearchListState extends State<ResultSearchList> {
+  // Для запроса добавления инструмента
   List<int> startInstrumentId = [];
-  List<String> startInstrumentNames = ['0'];
-  List<String> startSecid = [];
   List<int> startTotalQuantity = [0];
-  List<double> startLastPrice = [0.0];
   List<double> startAvgPrice = [0.0];
-  List<String> startEngine = [];
-  List<String> startGroup = [];
   List<int> startCurrencyid = [0];
   List<String> startCurrencyName = ['0'];
-  List<String> startMarket = [''];
   List<int> startInstrumentTypeId = [0];
   List<String> startInstrumentTypeName = ['0'];
+
+  // С Московской биржы
+  List<String> startInstrumentNames = ['0'];
+  List<String> startSecid = [];
+  List<String> startEngine = [];
+  List<String> startMarket = [''];
+  List<String> startGroup = [];
+  List<double> startLastPrice = [0.0];
+
   String utf8RUB = '\u20BD';
   String utf8USD = '\u0024';
   String utf8CHY = '\u00A5';
@@ -36,22 +40,15 @@ class _ResultSearchListState extends State<ResultSearchList> {
     BuyNewInstrumentsFromSearch instance = BuyNewInstrumentsFromSearch();
     await instance.getNewInstrumentsListForSearch(widget.SearchRequest);
     setState(() {
-       startInstrumentNames = instance.shortname;
-       startSecid = instance.secid;
-       startLastPrice = instance.last_price;
-       startEngine = instance.engine;
-       startMarket = instance.market;
-       startGroup = instance.group;
-
-
+      int endIndex = instance.shortname.length > 10 ? 10 : instance.shortname.length;
+      startInstrumentNames = instance.shortname.sublist(0, endIndex);
+      startSecid = instance.secid.sublist(0, endIndex);
+      startEngine = instance.engine.sublist(0, endIndex);
+      startMarket = instance.market.sublist(0, endIndex);
+      startGroup = instance.group.sublist(0, endIndex);
+      startLastPrice = instance.last_price.isNotEmpty ? instance.last_price.sublist(0, endIndex) : List.filled(endIndex, 0.0);
     });
   }
-
-  // // Функция записывающая instrument_id в глобальную переменную
-  // void setGlobalInstrumentId(int value) {
-  //   GlobalInstrumentId = value;
-  //   // print(GlobalInstrumentId);
-  // }
 
   String getCurrencySymbol(String currency) {
     switch (currency) {
@@ -177,6 +174,6 @@ class _ResultSearchListState extends State<ResultSearchList> {
     super.initState();
     getNewInstrumentsList();
     //print(getNewInstrumentsList());
-    //print('Введённая бумага: ${widget.SearchRequest}');
+    //print('Введённая бумага: ${widget.searchRequest}');
   }
 }

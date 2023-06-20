@@ -1,13 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
-import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts_list.dart';
 
 class BuyNewInstrumentsFromSearch {
   List<String> secid = [];
   List<String> shortname = [];
   List<String> group = [];
-  List<String> marketprice_boardid = [];
   List<String> engine = [];
   List<String> market = [];
   List<double> last_price = [];
@@ -16,7 +13,7 @@ class BuyNewInstrumentsFromSearch {
 
   Future<void> getNewInstrumentsListForSearch(String instrumentName) async {
     final url = Uri.parse(
-        'https://iss.moex.com/iss/securities.json?group_by=type&securities.columns=secid,shortname,group,marketprice_boardid&q=$instrumentName&iss.meta=off');
+        'https://iss.moex.com/iss/securities.json?group_by=type&securities.columns=secid,shortname,group&q=$instrumentName&iss.meta=off');
     final headers = {
       'Accept': 'application/json',
       'Accept-Encoding': 'gzip, deflate',
@@ -36,29 +33,31 @@ class BuyNewInstrumentsFromSearch {
         String itemSecid = item[columns.indexOf('secid')];
         String itemShortname = item[columns.indexOf('shortname')];
         String itemGroup = item[columns.indexOf('group')];
-        dynamic itemMarketpriceBoardid = item[columns.indexOf('marketprice_boardid')];
 
         secid.add(itemSecid);
         shortname.add(itemShortname);
         group.add(itemGroup);
-        marketprice_boardid.add(itemMarketpriceBoardid ?? '');
 
         List<String> groupParts = itemGroup.split('_');
         engine.add(groupParts.first);
         market.add(groupParts.last);
 
-        await getNewInstrumentsPriceListForSearch(engine.last, market.last, marketprice_boardid.last, secid.last);
+        await getNewInstrumentsPriceListForSearch(engine.last, market.last, secid.last);
       }
 
-      print(last_price);
+      print("secid: $secid");
+      print('shortname: $shortname');
+      print('engine: $engine');
+      print('market: $market');
+      print('last_price: $last_price');
     } else {
       print('Список инструментов счёта -- Ошибка при получении списка инструментов по счёту из поиска: ${response.statusCode}');
     }
   }
 
-  Future<void> getNewInstrumentsPriceListForSearch(String engine, String market, String marketprice_boardid, String secid) async {
+  Future<void> getNewInstrumentsPriceListForSearch(String engine, String market, String secid) async {
     final url = Uri.parse(
-        'https://iss.moex.com/iss/engines/$engine/markets/$market/boards/$marketprice_boardid/securities/$secid/.json?iss.meta=off');
+        'https://iss.moex.com/iss/engines/$engine/markets/$market/securities/$secid/.json?iss.meta=off');
     final headers = {
       'Accept': 'application/json',
       'Accept-Encoding': 'gzip, deflate',
@@ -75,7 +74,19 @@ class BuyNewInstrumentsFromSearch {
       List<List<dynamic>> data = List<List<dynamic>>.from(securities['data']);
 
       for (List<dynamic> item in data) {
-        dynamic itemLastPrice = item[columns.indexOf('LAST')];
+        int lastValueIndex = columns.indexOf('LASTVALUE');
+        int lastIndex = columns.indexOf('LAST');
+
+        dynamic itemLastPrice;
+        if (lastValueIndex != -1) {
+          itemLastPrice = item[lastValueIndex];
+        } else if (lastIndex != -1) {
+          itemLastPrice = item[lastIndex];
+        } else {
+          itemLastPrice = 0.0;
+        }
+
+
         double itemLastPriceDouble = itemLastPrice != null ? itemLastPrice.toDouble() : 0.0;
         last_price.add(itemLastPriceDouble);
       }
@@ -83,5 +94,5 @@ class BuyNewInstrumentsFromSearch {
       print('Список инструментов счёта -- Ошибка при получении списка последней цены инструментов по счёту из поиска: ${response.statusCode}');
     }
   }
-//
+
 }
