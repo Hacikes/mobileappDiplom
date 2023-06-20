@@ -83,5 +83,5 @@ class BuyNewInstrumentsFromSearch {
       print('Список инструментов счёта -- Ошибка при получении списка последней цены инструментов по счёту из поиска: ${response.statusCode}');
     }
   }
-
+//
 }
