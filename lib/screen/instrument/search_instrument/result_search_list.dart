@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
+import 'package:mobile_app_diplom/screen/instrument/buy_sell_instrument_screen/buy_new_instrument.dart';
 import 'package:mobile_app_diplom/services/services_for_operation/buy_new_instrument.dart';
 
 class ResultSearchList extends StatefulWidget {
-  const ResultSearchList({Key? key, required this.toggleView, required this.SearchRequest}) : super(key: key);
+  const ResultSearchList({Key? key,
+    required this.toggleView,
+    required this.SearchRequest,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails}) : super(key: key);
+
+  // Данные о счёте
+  final int AccountIdForDetails;
+  final String AccountNameForDetails;
+  final String BrokerNameForDetails;
+
+
 
   final String SearchRequest;
   final Function toggleView;
@@ -13,6 +26,7 @@ class ResultSearchList extends StatefulWidget {
 }
 
 class _ResultSearchListState extends State<ResultSearchList> {
+
   // Для запроса добавления инструмента
   List<int> startInstrumentId = [];
   List<int> startTotalQuantity = [0];
@@ -101,7 +115,7 @@ class _ResultSearchListState extends State<ResultSearchList> {
                         startInstrumentNames[index],
                         style: TextStyle(
                           color: ColorsClass.getFrontForNotPressedButton(),
-                          fontSize: 22,
+                          fontSize: 20,
                         ),
                       ),
                       if (startMarket[index] == 'currency_selt')
@@ -109,16 +123,16 @@ class _ResultSearchListState extends State<ResultSearchList> {
                           '0 $currencySymbol',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
-                            fontSize: 22,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         )
                       else
                         Text(
-                          '$formattedAvgPrice $currencySymbol',
+                          '$formattedAvgPrice $utf8RUB',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
-                            fontSize: 22,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -127,29 +141,33 @@ class _ResultSearchListState extends State<ResultSearchList> {
                   subtitle: startMarket[index] == 'currency_selt'
                       ? null
                       : Text(
-                    '0 шт',
+                    '',
                     style: TextStyle(
                       color: ColorsClass.getFrontForNotPressedButton(),
                     ),
                   ),
                   onTap: () {
-                    // setGlobalInstrumentId(startInstrumentId[index]);
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => instrumentDetailsScreen(
-                    //       toggleView: widget.toggleView,
-                    //       instrumentId: startInstrumentId[index],
-                    //       instrumentNames: startInstrumentNames[index],
-                    //       totalQuantity: startTotalQuantity[index],
-                    //       avgPrice: startAvgPrice[index],
-                    //       currencyId: startCurrencyid[index],
-                    //       currencyName: startCurrencyName[index],
-                    //       instrumentTypeId: startInstrumentTypeId[index],
-                    //       instrumentTypeName: startInstrumentTypeName[index],
-                    //     ),
-                    //   ),
-                    // );
+                    //setGlobalInstrumentId(startInstrumentId[index]);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BuyNewInstrument(
+                          toggleView: widget.toggleView,
+                          //instrumentId: startInstrumentId[index],
+                          InstrumentName: startInstrumentNames[index],
+                          //TotalQuantity: startTotalQuantity[index],
+                          AvgPrice: startLastPrice[index],
+                          // CurrencyId: startCurrencyid[index],
+                          // CurrencyName: startCurrencyName[index],
+                          // instrumentTypeId: startInstrumentTypeId[index],
+                          // InstrumentTypeName: startInstrumentTypeName[index],
+
+                          AccountIdForDetails: widget.AccountIdForDetails,
+                          AccountNameForDetails: widget.AccountNameForDetails,
+                          BrokerNameForDetails: widget.BrokerNameForDetails,
+                        ),
+                      ),
+                    );
                   },
                 ),
                 SizedBox(

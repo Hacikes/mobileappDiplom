@@ -103,7 +103,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
                         startInstrumentNames[index],
                         style: TextStyle(
                           color: ColorsClass.getFrontForNotPressedButton(),
-                          fontSize: 22,
+                          fontSize: 20,
                         ),
                       ),
                       if (startInstrumentTypeName[index] == 'Валюта')
@@ -111,7 +111,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
                           '${startTotalQuantity[index]} $currencySymbol',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
-                            fontSize: 22,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         )
@@ -120,7 +120,7 @@ class _ListInstrumentsState extends State<ListInstruments> {
                           '$formattedAvgPrice $currencySymbol',
                           style: TextStyle(
                             color: ColorsClass.getFrontForNotPressedButton(),
-                            fontSize: 22,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

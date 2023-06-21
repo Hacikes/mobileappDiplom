@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
+import 'package:mobile_app_diplom/screen/instrument/buy_sell_instrument_screen/buy_new_instrument_manual.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_move_to_diagram_screen_by_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/button_top_up_and_withdraw_from_account.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/free_cash_by_account.dart';
@@ -42,12 +43,28 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
         backgroundColor: ColorsClass.getBackgroundForSrceen(),
         appBar: AppBar(
           title: Text(widget.BrokerNameForDetails),
-          backgroundColor: ColorsClass.getBackgroundForSrceen(), // Измените цвет AppBar здесь
+          backgroundColor: ColorsClass.getBackgroundForSrceen(),
           elevation: 0.0,
           automaticallyImplyLeading: true,
-          // Виджет поиска
           actions: [
-            SearchScreen(toggleView: widget.toggleView,
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BuyNewInstrumentManual(
+                      toggleView: widget.toggleView,
+                      AccountIdForDetails: widget.AccountIdForDetails,
+                      AccountNameForDetails: widget.AccountNameForDetails,
+                      BrokerNameForDetails: widget.BrokerNameForDetails,
+                    ),
+                  ),
+                );
+              },
+            ),
+            SearchScreen(
+              toggleView: widget.toggleView,
               AccountIdForDetails: widget.AccountIdForDetails,
               AccountNameForDetails: widget.AccountNameForDetails,
               BrokerNameForDetails: widget.BrokerNameForDetails,
@@ -95,5 +112,3 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
     );
   }
 }
-
-

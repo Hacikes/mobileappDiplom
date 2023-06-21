@@ -114,6 +114,9 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     return ResultSearchList(
       toggleView: toggleView,
       SearchRequest: query,
+      AccountIdForDetails: AccountIdForDetails,
+      AccountNameForDetails: AccountNameForDetails,
+      BrokerNameForDetails: BrokerNameForDetails,
     );
   }
 
