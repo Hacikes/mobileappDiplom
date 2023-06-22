@@ -256,7 +256,7 @@ class _BuyInstrumentState extends State<BuyInstrument> {
                             default:
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Упс... Что-то пошло не так ...'),
+                                  content: Text('Упс... Что-то пошло не так ...\nВозможно вам не хватает средств'),
                                   duration: Duration(seconds: 3),
                                 ),
                               );

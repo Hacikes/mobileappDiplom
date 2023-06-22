@@ -28,21 +28,14 @@ class FreeCashInRUB {
     };
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
-      // Обработка успешного ответа
-      // print('Успешный ответ: ${response.headers}');
-      // print('Успешный ответ: ${response.body}');
-      // print('Успешный ответ: $url');
       print('Список инструментов счёта --- Успешный ответ при получении свободного количества денег для счёта: ${response.statusCode}');
 
       Map<String, dynamic> decodedJson = jsonDecode(response.body);
-      //print(decodedJson);
-      freeCash = decodedJson['total_value_for_instrument_type_id'];
-      // print(freeCash);
+      freeCash = double.parse(decodedJson['total_value_for_instrument_type_id'].toString());
 
+      print(freeCash);
     } else {
-      // Обработка ошибки
       print('Список инструментов счёта --- Ошибка при получении свободного количества денег для счёта: ${response.statusCode}');
-      // print('Успешный ответ: $url');
     }
     // return totalSum;
   }

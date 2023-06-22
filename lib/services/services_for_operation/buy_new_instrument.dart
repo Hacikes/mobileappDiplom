@@ -156,10 +156,10 @@ class BuyNewInstrumentsFromSearch {
     return response.statusCode;
   }
 
-  Future<int> sellInstrument(
-      String instrument_name, double price, int currency_id, int quantity, int instrument_type_id) async {
-    const String figi = 'XXX';
-    const int buyOperation = 2;
+  Future<int> buyInstrumentManual(
+      String instrument_name, String figi, double price, int currency_id, int quantity, int instrument_type_id) async {
+    // const String figi = 'XXX';
+    const int buyOperation = 1;
     final int? account_id = GlobalAccountId;
     final url = Uri.parse('http://80.90.179.158:9999/intruments/$GlobalAccountId');
     final headers = {
@@ -183,13 +183,13 @@ class BuyNewInstrumentsFromSearch {
       // print('Успешный ответ: ${url}');
       // print('Успешный ответ: ${response.headers}');
       // print('Успешный ответ: ${response.body}');
-      print('Успешный ответ при продаже инструмента: ${response.statusCode}');
+      print('Успешный ответ при покупке нового инструмента вручную: ${response.statusCode}');
     } else {
       // Обработка ошибки
-      print('Ошибка при продаже инструмента: ${response.statusCode}');
-      // print('Успешный ответ: ${url}');
-      // print('Успешный ответ: ${headers}');
-      // print('Успешный ответ: ${body}');
+      print('Ошибка при при покупке нового инструмента вручную: ${response.statusCode}');
+      print('URL: ${url}');
+      print('Заголовки: ${headers}');
+      print('Тело: ${body}');
     }
     return response.statusCode;
   }

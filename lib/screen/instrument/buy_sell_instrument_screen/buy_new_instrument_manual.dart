@@ -4,6 +4,7 @@ import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/instrument/buy_sell_instrument_screen/free_cash_in_currency.dart';
 import 'package:mobile_app_diplom/screen/instrument/instrument_details_screen/instrument_details_screen.dart';
 import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/instruments_on_account_screen.dart';
+import 'package:mobile_app_diplom/services/services_for_operation/buy_new_instrument.dart';
 import 'package:mobile_app_diplom/services/services_for_operation/buy_sell_instrument.dart';
 
 class BuyNewInstrumentManual extends StatefulWidget {
@@ -71,7 +72,7 @@ class _BuyNewInstrumentManualState extends State<BuyNewInstrumentManual> {
   double AvgPrice = 0.0;
   int CurrencyId = 0;
   String CurrencyName = '';
-  int instrumentTypeId = 0;
+  int InstrumentTypeId = 0;
   String InstrumentTypeName = '';
 
   int TotalQuantity = 0;
@@ -160,7 +161,7 @@ class _BuyNewInstrumentManualState extends State<BuyNewInstrumentManual> {
               ),
               SizedBox(height: 20.0),
               Text(
-                'Средняя цена',
+                'Цена',
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -176,15 +177,43 @@ class _BuyNewInstrumentManualState extends State<BuyNewInstrumentManual> {
                   ),
                 ],
                 decoration: InputDecoration(
-                  hintText: 'Введите среднюю цену',
+                  hintText: 'Введите цену одной штуки',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
                 validator: (val) =>
-                val!.isEmpty ? 'Введите среднюю цену' : null,
+                val!.isEmpty ? 'Введите цену' : null,
                 onChanged: (val) {
                   setState(() => AvgPrice = double.parse(val));
                 },
               ),
+              SizedBox(height: 20.0),
+              Text(
+                'Количество',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: ColorsClass.getFrontForNotPressedButton(),
+                ),
+              ),
+              TextFormField(
+                style: TextStyle(color: ColorsClass.getFrontForNotPressedButton()),
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(
+                    RegExp(r'^[\d]*'),
+                  ),
+                ],
+                decoration: InputDecoration(
+                  hintText: 'Введите количество',
+                  hintStyle: TextStyle(color: Colors.grey),
+                ),
+                validator: (val) =>
+                val!.isEmpty ? 'Введите количество' : null,
+                onChanged: (val) {
+                  setState(() => TotalQuantity = int.parse(val));
+                },
+              ),
+
               SizedBox(height: 20.0),
               Text(
                 'Валюта',
@@ -270,11 +299,11 @@ class _BuyNewInstrumentManualState extends State<BuyNewInstrumentManual> {
                 ),
                 items: [
                   DropdownMenuItem(
-                    child: Text('Акция'),
+                    child: Text('Акции'),
                     value: 1,
                   ),
                   DropdownMenuItem(
-                    child: Text('Облигация'),
+                    child: Text('Облигации'),
                     value: 2,
                   ),
                   DropdownMenuItem(
@@ -294,8 +323,8 @@ class _BuyNewInstrumentManualState extends State<BuyNewInstrumentManual> {
                 val == null ? 'Выберите тип инструмента' : null,
                 onChanged: (val) {
                   setState(() {
-                    instrumentTypeId = val as int;
-                    switch (instrumentTypeId) {
+                    InstrumentTypeId = val as int;
+                    switch (InstrumentTypeId) {
                       case 1:
                         InstrumentTypeName = 'Акции';
                         break;
@@ -327,16 +356,60 @@ class _BuyNewInstrumentManualState extends State<BuyNewInstrumentManual> {
                   //primary: ColorsClass.getFrontForNotPressedButton(),
                   onPrimary: ColorsClass.getFrontForNotPressedButton(),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     // Добавить код для сохранения данных инструмента
-                    // saveInstrumentToDatabase();
-                    //   print('Название инструмента: ${InstrumentName}');
-                    print('Название инструмента: ${InstrumentName}');
-                    print('Тикер: $Tiker');
-                    print('Средняя цена: $AvgPrice');
-                    print('Валюта: $CurrencyName');
-                    print('Тип инструмента: $InstrumentTypeName');
+
+                    final statusCode =
+                        await BuyNewInstrumentsFromSearch().buyInstrumentManual(
+                        InstrumentName,
+                        Tiker,
+                        AvgPrice,
+                        CurrencyId,
+                        TotalQuantity,
+                        InstrumentTypeId
+                    );
+                    switch (statusCode) {
+                      case 200:
+                      // Создание счёта прошел успешно, возврат на список счетов
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => ListOfInstruments(
+                            toggleView: widget.toggleView,
+                            AccountIdForDetails: widget.AccountIdForDetails,
+                            AccountNameForDetails: widget.AccountNameForDetails,
+                            BrokerNameForDetails: widget.BrokerNameForDetails,
+                          )
+                          ),
+                        );
+                        break;
+                      case 400:
+                      // Ошибка 400, выводим сообщение об ошибке
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Необходимо заполнить все поля'),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                        break;
+                      default:
+                      // Обработка других статусов ответа
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Упс... Что-то пошло не так ...\nВозможно вам не хватает средств'),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                        break;
+                    }
+                    // print('Название инструмента: ${InstrumentName}');
+                    // print('Тикер: $Tiker');
+                    // print('Цена: $AvgPrice');
+                    // print('Количество: $TotalQuantity');
+                    // print('CurrencyId: $CurrencyId');
+                    // print('Валюта: $CurrencyName');
+                    // print('InstrumentTypeId: $InstrumentTypeId');
+                    // print('Тип инструмента: $InstrumentTypeName');
                   }
                 },
                 child: Text(

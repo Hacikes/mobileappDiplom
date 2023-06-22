@@ -65,7 +65,7 @@ class _AddAccountState extends State<AddAccount> {
                 validator: (val) {
                   if (val!.isEmpty) {
                     return 'Введите наименование счёта';
-                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я]+$').hasMatch(val)) {
+                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я\s]+$').hasMatch(val)) {
                     return 'Спец. символы в имени не допустимы';
                   }
                   return null;
@@ -94,7 +94,7 @@ class _AddAccountState extends State<AddAccount> {
                 validator: (val) {
                   if (val!.isEmpty) {
                     return 'Введите наименование брокера';
-                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я]+$').hasMatch(val)) {
+                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я\s]+$').hasMatch(val)) {
                     return 'Спец. символы в имени не допустимы';
                   }
                   return null;
@@ -104,8 +104,8 @@ class _AddAccountState extends State<AddAccount> {
               ElevatedButton(
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){
-                    print(accountName);
-                    print(brokerName);
+                    // print(accountName);
+                    // print(brokerName);
                     final addAccountService = AddAccountService();
 
                     final statusCode =
