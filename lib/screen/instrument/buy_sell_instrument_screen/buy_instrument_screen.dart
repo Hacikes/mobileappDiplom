@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/screen/instrument/buy_sell_instrument_screen/free_cash_in_currency.dart';
 import 'package:mobile_app_diplom/screen/instrument/instrument_details_screen/instrument_details_screen.dart';
+import 'package:mobile_app_diplom/screen/instrument/instruments_on_account_screen/instruments_on_account_screen.dart';
 import 'package:mobile_app_diplom/services/services_for_operation/buy_sell_instrument.dart';
 
 class BuyInstrument extends StatefulWidget {
@@ -17,7 +18,14 @@ class BuyInstrument extends StatefulWidget {
     required this.CurrencyName,
     required this.instrumentTypeId,
     required this.InstrumentTypeName,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails,
   }) : super(key: key);
+
+  final int AccountIdForDetails;
+  final String AccountNameForDetails;
+  final String BrokerNameForDetails;
 
   final int InstrumentId;
   final String InstrumentName;
@@ -230,17 +238,11 @@ class _BuyInstrumentState extends State<BuyInstrument> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => instrumentDetailsScreen(
+                                  builder: (context) => ListOfInstruments(
                                     toggleView: widget.toggleView,
-                                    instrumentId: widget.InstrumentId,
-                                    instrumentNames: widget.InstrumentName,
-                                    totalQuantity: widget.TotalQuantity + inputCount,
-                                    avgPrice: (widget.AvgPrice * widget.TotalQuantity + inputPrice * inputCount) /
-                                        (widget.TotalQuantity + inputCount),
-                                    currencyId: widget.CurrencyId,
-                                    currencyName: widget.CurrencyName,
-                                    instrumentTypeId: widget.instrumentTypeId,
-                                    instrumentTypeName: widget.InstrumentTypeName,
+                                    AccountIdForDetails: widget.AccountIdForDetails,
+                                    AccountNameForDetails: widget.AccountNameForDetails,
+                                    BrokerNameForDetails: widget.BrokerNameForDetails,
                                   ),
                                 ),
                               );

@@ -17,6 +17,9 @@ class instrumentDetailsScreen extends StatefulWidget {
     required this.currencyName,
     required this.instrumentTypeId,
     required this.instrumentTypeName,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails,
   }) : super(key: key);
 
   final int instrumentId;
@@ -27,6 +30,10 @@ class instrumentDetailsScreen extends StatefulWidget {
   final String currencyName;
   final int instrumentTypeId;
   final String instrumentTypeName;
+
+  final int AccountIdForDetails;
+  final String AccountNameForDetails;
+  final String BrokerNameForDetails;
 
   final Function toggleView;
 
@@ -76,7 +83,10 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                         currencyId: widget.currencyId,
                         CurrencyName: widget.currencyName,
                         instrumentTypeId: widget.instrumentTypeId,
-                        InstrumentTypeName: widget.instrumentTypeName
+                        InstrumentTypeName: widget.instrumentTypeName,
+                        AccountIdForDetails: widget.AccountIdForDetails,
+                        AccountNameForDetails: widget.AccountNameForDetails,
+                        BrokerNameForDetails: widget.BrokerNameForDetails,
                     ),
                     button_sell_instrument(toggleView: widget.toggleView,
                         InstrumentId: widget.instrumentId,
@@ -86,7 +96,10 @@ class _instrumentDetailsScreenState extends State<instrumentDetailsScreen> {
                         currencyId: widget.currencyId,
                         CurrencyName: widget.currencyName,
                         instrumentTypeId: widget.instrumentTypeId,
-                        InstrumentTypeName: widget.instrumentTypeName
+                        InstrumentTypeName: widget.instrumentTypeName,
+                      AccountIdForDetails: widget.AccountIdForDetails,
+                      AccountNameForDetails: widget.AccountNameForDetails,
+                      BrokerNameForDetails: widget.BrokerNameForDetails,
                     ),
                   ],
               ),

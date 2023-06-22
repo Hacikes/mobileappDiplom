@@ -14,7 +14,10 @@ class button_sell_instrument extends StatefulWidget {
     required this.currencyId,
     required this.CurrencyName,
     required this.instrumentTypeId,
-    required this.InstrumentTypeName, }) : super(key: key);
+    required this.InstrumentTypeName,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails, }) : super(key: key);
 
   final int InstrumentId;
   final String InstrumentName;
@@ -24,6 +27,10 @@ class button_sell_instrument extends StatefulWidget {
   final String CurrencyName;
   final int instrumentTypeId;
   final String InstrumentTypeName;
+
+  final int AccountIdForDetails;
+  final String AccountNameForDetails;
+  final String BrokerNameForDetails;
 
   final Function toggleView;
 
@@ -42,15 +49,20 @@ class _button_sell_instrumentState extends State<button_sell_instrument> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) =>
-                SellInstrument(toggleView: widget.toggleView,
-                    InstrumentId: widget.InstrumentId,
-                    InstrumentName: widget.InstrumentName,
-                    TotalQuantity: widget.TotalQuantity,
-                    AvgPrice: widget.AvgPrice,
-                    CurrencyId: widget.currencyId,
-                    CurrencyName: widget.CurrencyName,
-                    instrumentTypeId: widget.instrumentTypeId,
-                    InstrumentTypeName: widget.InstrumentTypeName
+                SellInstrument(
+                  toggleView: widget.toggleView,
+                  AccountIdForDetails: widget.AccountIdForDetails,
+                  AccountNameForDetails: widget.AccountNameForDetails,
+                  BrokerNameForDetails: widget.BrokerNameForDetails,
+                  InstrumentId: widget.InstrumentId,
+                  InstrumentName: widget.InstrumentName,
+                  TotalQuantity: widget.TotalQuantity,
+                  AvgPrice: widget.AvgPrice,
+                  CurrencyId: widget.currencyId,
+                  CurrencyName: widget.CurrencyName,
+                  instrumentTypeId: widget.instrumentTypeId,
+                  InstrumentTypeName: widget.InstrumentTypeName,
+
                 )
             ),
           );

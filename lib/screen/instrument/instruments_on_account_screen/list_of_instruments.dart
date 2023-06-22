@@ -7,7 +7,14 @@ import 'package:mobile_app_diplom/services/services_for_instrument/get_instrumen
 int? GlobalInstrumentId;
 
 class ListInstruments extends StatefulWidget {
-  const ListInstruments({Key? key, required this.toggleView}) : super(key: key);
+  const ListInstruments({Key? key, required this.toggleView,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails}) : super(key: key);
+
+  final int AccountIdForDetails;
+  final String AccountNameForDetails;
+  final String BrokerNameForDetails;
 
   final Function toggleView;
 
@@ -24,6 +31,9 @@ class _ListInstrumentsState extends State<ListInstruments> {
   List<String> startCurrencyName = ['0'];
   List<int> startInstrumentTypeId = [0];
   List<String> startInstrumentTypeName = ['0'];
+
+
+
   String utf8RUB = '\u20BD';
   String utf8USD = '\u0024';
   String utf8CHY = '\u00A5';
@@ -149,6 +159,9 @@ class _ListInstrumentsState extends State<ListInstruments> {
                           currencyName: startCurrencyName[index],
                           instrumentTypeId: startInstrumentTypeId[index],
                           instrumentTypeName: startInstrumentTypeName[index],
+                          AccountIdForDetails: widget.AccountIdForDetails,
+                          AccountNameForDetails: widget.AccountNameForDetails,
+                          BrokerNameForDetails: widget.BrokerNameForDetails,
                         ),
                       ),
                     );

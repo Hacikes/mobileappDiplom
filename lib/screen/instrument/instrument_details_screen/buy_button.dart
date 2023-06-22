@@ -13,7 +13,15 @@ class button_buy_instrument extends StatefulWidget {
     required this.currencyId,
     required this.CurrencyName,
     required this.instrumentTypeId,
-    required this.InstrumentTypeName, }) : super(key: key);
+    required this.InstrumentTypeName,
+    required this.AccountIdForDetails,
+    required this.AccountNameForDetails,
+    required this.BrokerNameForDetails, }) : super(key: key);
+
+  final int AccountIdForDetails;
+  final String AccountNameForDetails;
+  final String BrokerNameForDetails;
+
 
   final int InstrumentId;
   final String InstrumentName;
@@ -49,7 +57,11 @@ class _button_buy_instrumentState extends State<button_buy_instrument> {
                 CurrencyId: widget.currencyId,
                 CurrencyName: widget.CurrencyName,
                 instrumentTypeId: widget.instrumentTypeId,
-                InstrumentTypeName: widget.InstrumentTypeName
+                InstrumentTypeName: widget.InstrumentTypeName,
+
+                AccountIdForDetails: widget.AccountIdForDetails,
+                AccountNameForDetails: widget.AccountNameForDetails,
+                BrokerNameForDetails: widget.BrokerNameForDetails,
               )
             ),
           );

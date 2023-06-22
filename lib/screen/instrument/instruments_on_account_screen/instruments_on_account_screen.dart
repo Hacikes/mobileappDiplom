@@ -93,7 +93,11 @@ class _ListOfInstrumentsState extends State<ListOfInstruments> {
                 AccountNameForDetails: widget.AccountNameForDetails,
                 BrokerNameForDetails: widget.BrokerNameForDetails,
               ),
-              ListInstruments(toggleView: widget.toggleView),
+              ListInstruments(toggleView: widget.toggleView,
+                AccountIdForDetails: widget.AccountIdForDetails,
+                AccountNameForDetails: widget.AccountNameForDetails,
+                BrokerNameForDetails: widget.BrokerNameForDetails,
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 0),
                 child: ButtonTopUpAndWithdrawFromAccount(
