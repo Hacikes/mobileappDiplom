@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:mobile_app_diplom/screen/calculator/calculator_count_screen.dart';
 import 'package:mobile_app_diplom/color/colors.dart';
 import 'package:mobile_app_diplom/mock/mock_user_info_on_drawer.dart';
 import 'package:mobile_app_diplom/screen/account/accounts_screen/accounts.dart';
@@ -7,6 +8,8 @@ import 'package:mobile_app_diplom/screen/auth/sigh_in.dart';
 import 'package:mobile_app_diplom/screen/home/home_screen_with_diagrams/home_currency.dart';
 import 'package:mobile_app_diplom/services/services_for_auth/logout.dart';
 import 'package:mobile_app_diplom/services/services_for_drawer/get_username_and_email.dart';
+
+import '../calculator/calculator_volume_screen.dart';
 
 class DrawerFull extends StatefulWidget {
   DrawerFull({required this.context});
@@ -130,26 +133,28 @@ class _DrawerFullState extends State<DrawerFull> {
                 ),
               ),
               onTap: () {
-                // Обработчик нажатия на пункт меню
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CalculatorInputCountScreen(toggleView: toggleView)),
+                );
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.settings_outlined,
-                color: ColorsClass.getPouringForIcon(),
-              ),
-              title: Text(
-                'Настройки',
-                style: TextStyle(
-                  color: ColorsClass.getFrontForNotPressedButton(),
-                ),
-              ),
-              onTap: () {
-                // Обработчик нажатия на пункт меню
-                Navigator.pop(context);
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.settings_outlined,
+            //     color: ColorsClass.getPouringForIcon(),
+            //   ),
+            //   title: Text(
+            //     'Настройки',
+            //     style: TextStyle(
+            //       color: ColorsClass.getFrontForNotPressedButton(),
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     // Обработчик нажатия на пункт меню
+            //     Navigator.pop(context);
+            //   },
+            // ),
             // Добавляем кнопку в нижней части боковой панели
             SizedBox(
               height: 1,

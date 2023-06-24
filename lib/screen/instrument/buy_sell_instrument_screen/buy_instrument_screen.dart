@@ -274,7 +274,7 @@ class _BuyInstrumentState extends State<BuyInstrument> {
                         minimumSize: Size(double.infinity, 40),
                       ),
                       child: Text(
-                        'Купить',
+                        'Добавить',
                         style: TextStyle(
                           color: ColorsClass.getFrontForNotPressedButton(),
                         ),

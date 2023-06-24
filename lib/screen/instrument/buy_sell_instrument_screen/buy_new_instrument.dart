@@ -222,14 +222,14 @@ class _BuyNewInstrumentState extends State<BuyNewInstrument> {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    Text(
-                      'Количество: ${getTotalQuantity()} шт',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        color: ColorsClass.getFrontForHeaderText(),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
+                    // Text(
+                    //   'Количество: ${getTotalQuantity()} шт',
+                    //   style: TextStyle(
+                    //     fontSize: 24.0,
+                    //     color: ColorsClass.getFrontForHeaderText(),
+                    //   ),
+                    //   textAlign: TextAlign.left,
+                    // ),
                     SizedBox(height: 10.0),
                     ElevatedButton(
                       onPressed: () async {
@@ -295,7 +295,7 @@ class _BuyNewInstrumentState extends State<BuyNewInstrument> {
                         minimumSize: Size(double.infinity, 40),
                       ),
                       child: Text(
-                        'Купить',
+                        'Добавить',
                         style: TextStyle(
                           color: ColorsClass.getFrontForNotPressedButton(),
                         ),

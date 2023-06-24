@@ -13,6 +13,16 @@ class ColorsClass {
     Colors.cyanAccent,
     Colors.orangeAccent,
     Colors.red[100]!,
+    Colors.deepPurple,
+    Colors.pink[800]!,
+    Colors.cyan,
+    Colors.deepOrange,
+    Colors.lightGreenAccent,
+    Colors.purple,
+    Colors.blue[700]!,
+    Colors.lime,
+    Colors.purpleAccent,
+    Colors.tealAccent,
     // Добавьте другие цвета, если необходимо
   ];
 

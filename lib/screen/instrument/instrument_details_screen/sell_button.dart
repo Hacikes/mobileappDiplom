@@ -73,7 +73,7 @@ class _button_sell_instrumentState extends State<button_sell_instrument> {
             borderRadius: BorderRadius.circular(30),
           ),
         ),
-        child: const Text("Продать"),
+        child: const Text("Уменьшить"),
       ),
 
     );

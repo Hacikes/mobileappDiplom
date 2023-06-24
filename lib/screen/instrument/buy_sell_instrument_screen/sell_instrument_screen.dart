@@ -278,7 +278,7 @@ class _SellInstrumentState extends State<SellInstrument> {
                         minimumSize: Size(double.infinity, 40),
                       ),
                       child: Text(
-                        'Продать',
+                        'Уменьшить',
                         style: TextStyle(
                           color: ColorsClass.getFrontForNotPressedButton(),
                         ),

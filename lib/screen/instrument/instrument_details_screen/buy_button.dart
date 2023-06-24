@@ -72,7 +72,7 @@ class _button_buy_instrumentState extends State<button_buy_instrument> {
             borderRadius: BorderRadius.circular(30),
           ),
         ),
-        child: const Text("Купить"),
+        child: const Text("Добавить"),
       ),
 
     );
