@@ -205,7 +205,7 @@ class _DrawerFullState extends State<DrawerFull> {
                           onPressed: () async {
                             final logoutService = LogOutService();
                             final statusCode = await logoutService.logout();
-                            if (statusCode == 200) {
+                            if (statusCode == 200 || statusCode == 401) {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) => SignIn(toggleView: widget.toggleView)),
