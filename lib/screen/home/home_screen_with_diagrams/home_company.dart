@@ -26,7 +26,7 @@ class _HomeCompanyState extends State<HomeCompany> {
       child: Scaffold(
         backgroundColor: ColorsClass.getBackgroundForSrceen(),
         appBar: AppBar(
-          title: const Text('Home'),
+          title: const Text(''),
           backgroundColor: ColorsClass.getBackgroundForAppbar(),
           elevation: 0.0,
           automaticallyImplyLeading: true, // Убираем кнопку "Назад"

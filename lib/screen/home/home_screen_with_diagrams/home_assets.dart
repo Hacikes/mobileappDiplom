@@ -26,7 +26,7 @@ class _HomeAssetsState extends State<HomeAssets> {
       child: Scaffold(
         backgroundColor: ColorsClass.getBackgroundForSrceen(),
         appBar: AppBar(
-          title: Text('Home'),
+          title: Text(''),
           backgroundColor: ColorsClass.background_for_appbar,
           elevation: 0.0,
           automaticallyImplyLeading: true, // Убираем кнопку "Назад"
