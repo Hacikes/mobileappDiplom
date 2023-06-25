@@ -43,6 +43,7 @@ class TotalVolumeCurrencyInRUB {
       // Обработка ошибки
       print('Хомяк --- Ошибка при получении общего количества денег: ${response.statusCode}');
       // print('Успешный ответ: $url');
+      totalSum = "XXX XXX XXX XXX";
     }
     // return totalSum;
   }

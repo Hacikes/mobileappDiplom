@@ -44,6 +44,7 @@ class TotalVolumeCurrencyByAccountInRUB {
       // Обработка ошибки
       print('Счёт --- Ошибка при получении общего количества денег для счёта: ${response.statusCode}');
       // print('Успешный ответ: $url');
+      totalSum = "XXX XXX XXX XXX";
     }
     // return totalSum;
   }

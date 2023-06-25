@@ -107,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                 validator: (val) {
                   if (val!.isEmpty) {
                     return 'Введите имя';
-                  } else if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(val)) {
+                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я\s]*$').hasMatch(val)) {
                     return 'Спец. символы в имени не допустимы';
                   }
                   return null;

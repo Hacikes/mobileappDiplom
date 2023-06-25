@@ -65,7 +65,7 @@ class _AddAccountState extends State<AddAccount> {
                 validator: (val) {
                   if (val!.isEmpty) {
                     return 'Введите наименование счёта';
-                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я\s]+$').hasMatch(val)) {
+                  } else if (!RegExp(r'^[a-zA-Z0-9а-яА-я\s]*$').hasMatch(val)) {
                     return 'Спец. символы в имени не допустимы';
                   }
                   return null;
